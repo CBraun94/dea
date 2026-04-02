@@ -11,7 +11,7 @@ def read(path: str = '') -> list[str]:
     return _f
 
 
-def test(lines: list[str]) -> dict:
+def mermaid_state_to_dict(lines: list[str]) -> dict:
     _found = lines[0].find(S)
 
     _r: dict = {}
@@ -36,7 +36,7 @@ def test(lines: list[str]) -> dict:
 if __name__ == '__main__':
     import dea
     _l = read(r'/home/chris/dev/dea/src/test.mermaid')
-    _d = test(_l)
+    _d = mermaid_state_to_dict(_l)
 
     s = dea.DEA()
     s.fromDict(_d)

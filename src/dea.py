@@ -1,3 +1,6 @@
+import mermaid_reader as mr
+
+
 NONE = '__none'
 N = '[*]'
 E = 'END_STATE'
@@ -9,22 +12,27 @@ C = "if __name__ == '__main__':\n    import sys\n    state_START_STATE(sys.argv[
 D = '    print("done")\n'
 
 
-class Transition(object):
+class BaseDEAObject(object):
     def __init__(self):
         self.name: str = NONE
+
+
+class Transition(BaseDEAObject):
+    def __init__(self):
+        super().__init__()
         self.dst: str = NONE
 
 
-class State(object):
+class State(BaseDEAObject):
     def __init__(self):
-        self.name: str = NONE
+        super().__init__()
         self.trans: dict[str, Transition] = {}
         self.isEnd: bool = False
 
 
-class DEA(object):
+class DEA(BaseDEAObject):
     def __init__(self):
-        self.name: str = NONE
+        super().__init__()
         self.states: dict[str, State] = {}
 
     def fromDict(self, d: dict):
@@ -46,6 +54,11 @@ class DEA(object):
         _ss.name = E
         _ss.isEnd = True
         self.states[_ss.name] = _ss
+
+    def read_mermaid_file(self, path: str = ''):
+        _lines = mr.read(path)
+        _dict = mr.mermaid_state_to_dict(_lines)
+        self.fromDict(_dict)
 
     def toPython(self) -> str:
         _s = ''
