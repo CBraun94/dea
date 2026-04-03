@@ -6,6 +6,10 @@ S = 'flowchart'
 T = '-->'
 N = '[*]'
 
+RE_T = re.compile(r'\(([^)]+)\)')
+RE_A = re.compile(r'\[([^]]+)\]')
+
+
 @dataclass
 class Node:
     id: str
@@ -52,6 +56,12 @@ def read_body(body: list[str], fc:Flowchart):
 
             _source = _t[0]
             _target = _t[1]
+
+            ss = RE_T.findall(_target)
+            print(ss)
+
+            ff = RE_A.findall(_target)
+            print(ff)
 
 
 def read_mermaid_flowchart(lines: list[str]) -> Flowchart:
