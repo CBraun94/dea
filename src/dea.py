@@ -12,6 +12,12 @@ C = "if __name__ == '__main__':\n    import sys\n    state_START_STATE(sys.argv[
 D = '    print("done")\n'
 
 
+def pl_df_edges():
+    import polars as pl
+    data = []
+    pl.DataFrame(data, schema=["node_start", "node_end"], orient="row")
+
+
 class BaseDEAObject(object):
     def __init__(self):
         self.name: str = NONE
