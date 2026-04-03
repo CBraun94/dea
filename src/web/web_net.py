@@ -37,7 +37,7 @@ def prepare_labels(graph_renderer):
     return labels
 
 
-def get_netgraph():
+def get_netgraph(plot_width: int = 800, plot_height: int = 800):
 
     # Prepare Data
     G = get_net_data()
@@ -45,8 +45,8 @@ def get_netgraph():
 
     # Show with Bokeh
     p = Plot(
-        width=800,
-        height=800,
+        width=plot_width,
+        height=plot_height,
         x_range=Range1d(-1.1, 1.1),
         y_range=Range1d(-1.1, 1.1),
     )
@@ -62,7 +62,5 @@ def get_netgraph():
     p.renderers.append(graph_renderer)
 
     p.renderers.append(labels)
-
-    show(p)
 
     return p
