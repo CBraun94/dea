@@ -15,7 +15,17 @@ D = '    print("done")\n'
 def pl_df_edges():
     import polars as pl
     data = []
-    pl.DataFrame(data, schema=["node_start", "node_end"], orient="row")
+    _df = pl.DataFrame(data, schema=["node_start", "node_end", "docstring"], orient="row")
+
+    return _df
+
+
+def pl_df_nodes():
+    import polars as pl
+    data = []
+    _df = pl.DataFrame(data, schema=["name", "docstring"], orient="row")
+
+    return _df
 
 
 class BaseDEAObject(object):
