@@ -9,6 +9,7 @@ from bokeh.models import (
     Plot,
     Range1d,
     ResetTool,
+    LabelSet
 )
 from bokeh.palettes import Spectral4
 from bokeh.plotting import from_networkx
@@ -34,8 +35,8 @@ def get_netgraph():
 
     # Show with Bokeh
     p = Plot(
-        width=400,
-        height=400,
+        width=800,
+        height=800,
         x_range=Range1d(-1.1, 1.1),
         y_range=Range1d(-1.1, 1.1),
     )
@@ -46,8 +47,15 @@ def get_netgraph():
 
     graph_renderer = from_networkx(G, nx.spectral_layout, scale=1, center=(0, 0))
 
+    x,y=zip(*graph_renderer.layout_provider.graph_layout.values())
+    graph_renderer.node_renderer.data_source.data['x']=x
+    graph_renderer.node_renderer.data_source.data['y']=y
+
+    labels=LabelSet(x='x', y='y', text='index',level='glyph', source=graph_renderer.node_renderer.data_source)
 
     p.renderers.append(graph_renderer)
+
+    p.renderers.append(labels)
 
     show(p)
 
