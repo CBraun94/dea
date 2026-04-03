@@ -53,11 +53,12 @@ def get_netgraph(plot_width: int = 800, plot_height: int = 800):
     p.title.text = "DFA"
     p.toolbar.autohide = True
 
-    node_hover_tool = HoverTool(tooltips=[("index", "@index"), ("club", "@club")])
+    node_hover_tool = HoverTool(tooltips=[("name", "@index"), ("club", "@club")])
     node_tap_tool = TapTool()
     p.add_tools(node_hover_tool, ResetTool(), WheelZoomTool(), PanTool(), node_tap_tool)
 
     graph_renderer = from_networkx(G, nx.spectral_layout, scale=1, center=(0, 0))
+    graph_renderer.node_renderer.glyph = Circle(radius=0.03)
 
     labels = prepare_labels(graph_renderer=graph_renderer)
 

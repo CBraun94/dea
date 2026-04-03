@@ -28,6 +28,14 @@ def pl_df_nodes():
     return _df
 
 
+def pl_df_graphs():
+    import polars as pl
+    data = []
+    _df = pl.DataFrame(data, schema=["name", "docstring", "mermaid"], orient="row")
+
+    return _df
+
+
 class BaseDEAObject(object):
     def __init__(self):
         self.name: str = NONE
