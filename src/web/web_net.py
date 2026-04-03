@@ -27,6 +27,16 @@ def get_net_data():
     return G
 
 
+def prepare_labels(graph_renderer):
+    x,y=zip(*graph_renderer.layout_provider.graph_layout.values())
+    graph_renderer.node_renderer.data_source.data['x']=x
+    graph_renderer.node_renderer.data_source.data['y']=y
+
+    labels=LabelSet(x='x', y='y', text='index',level='glyph', source=graph_renderer.node_renderer.data_source)
+
+    return labels
+
+
 def get_netgraph():
 
     # Prepare Data
@@ -47,11 +57,7 @@ def get_netgraph():
 
     graph_renderer = from_networkx(G, nx.spectral_layout, scale=1, center=(0, 0))
 
-    x,y=zip(*graph_renderer.layout_provider.graph_layout.values())
-    graph_renderer.node_renderer.data_source.data['x']=x
-    graph_renderer.node_renderer.data_source.data['y']=y
-
-    labels=LabelSet(x='x', y='y', text='index',level='glyph', source=graph_renderer.node_renderer.data_source)
+    labels = prepare_labels(graph_renderer=graph_renderer)
 
     p.renderers.append(graph_renderer)
 
