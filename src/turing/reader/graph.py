@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional
 import networkx as nx
 
+
 @dataclass
 class Node:
     id: str

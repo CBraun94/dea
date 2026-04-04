@@ -1,4 +1,6 @@
 import networkx as nx
+from networkx.drawing.nx_agraph import write_dot, graphviz_layout
+
 from bokeh.models import (
     BoxZoomTool,
     WheelZoomTool,
@@ -40,6 +42,7 @@ def prepare_tools():
 
 def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 400, plot_height: int = 400):
     import graph
+    import math
 
     p = Plot(
         width=plot_width,
@@ -65,7 +68,9 @@ def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 
 
     p.tools = tools
 
-    graph_renderer = from_networkx(G, nx.spectral_layout, scale=1, center=(0, 0))
+    # graph_renderer = from_networkx(G, nx.spectral_layout, scale=1, center=(0, 0))
+    # graph_renderer = from_networkx(G, nx.spring_layout, scale=1, center=(0, 0), k=5/math.sqrt(G.order()), seed=0)
+    graph_renderer = from_networkx(graph=G, layout_function=graphviz_layout, prog='dot')
     graph_renderer.node_renderer.glyph = Circle(radius=0.03)
 
     labels = graph.util.prepare_labels(graph_renderer=graph_renderer)
