@@ -30,20 +30,6 @@ def get_net_data():
     return G
 
 
-def prepare_labels(graph_renderer) -> LabelSet:
-    x, y = zip(*graph_renderer.layout_provider.graph_layout.values())
-    graph_renderer.node_renderer.data_source.data['x'] = x
-    graph_renderer.node_renderer.data_source.data['y'] = y
-
-    labels = LabelSet(x='x',
-                      y='y',
-                      text='index',
-                      level='glyph',
-                      source=graph_renderer.node_renderer.data_source)
-
-    return labels
-
-
 def prepare_tools():
     node_hover_tool = HoverTool(tooltips=[("name", "@index"), ("club", "@club")])
     node_tap_tool = TapTool()
@@ -53,8 +39,8 @@ def prepare_tools():
 
 
 def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 800, plot_height: int = 800):
-    from graph.util import prepare_labels
-    
+    import graph
+
     p = Plot(
         width=plot_width,
         height=plot_height,
@@ -75,7 +61,7 @@ def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 
     graph_renderer = from_networkx(G, nx.spectral_layout, scale=1, center=(0, 0))
     graph_renderer.node_renderer.glyph = Circle(radius=0.03)
 
-    labels = prepare_labels(graph_renderer=graph_renderer)
+    labels = graph.util.prepare_labels(graph_renderer=graph_renderer)
 
     p.renderers.append(graph_renderer)
 
