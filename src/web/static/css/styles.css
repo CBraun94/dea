@@ -1,44 +1,29 @@
-#left { float: left;width: 200px; }
-#right { float: right;width: 200px; }
-
-.main {
-    width: 600px;
-    height: 100%;
-    display: inline-block;
+.container {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "menu content"
+    "footer footer";
+  grid-template-columns: 1fr 3fr;
+  gap: 3px;
+  background-color: dodgerblue;
+  padding: 5px;
 }
-
-.links_rechts {
-    width: 200px;
-    height: 100%;
-    display: inline-block;
-    vertical-align: top;
-    background-color: blue;    
+.container div {
+  background-color: white;
+  padding: 10px;
 }
-
-.mitte {
-    width: 200px;
-    height: 100%;
-    display: inline-block;
-    vertical-align: top;
-    background-color: magenta;    
+.container div.header {
+  grid-area: header;
+  text-align: center;
 }
-
-div.mycontainer {
-  width:100%;
-  overflow:auto;
-  height: 100%;
+.container div.menu {
+  grid-area: menu;
 }
-div.mycontainer div {
-  width:33%;  
-  float:left;
-  height: 100%;
+.container div.content {
+  grid-area: content;
 }
-
-.test {
-    text-align:center;
-    width:800px;
-    margin:0 auto;
-    background-color:red;
-    color:white;
-    padding: 5px;
+.container div.footer {
+  grid-area: footer;
+  text-align: center;  
 }
