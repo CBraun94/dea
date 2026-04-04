@@ -50,7 +50,8 @@
 }
 .container div.footer {
   grid-area: footer;
-  text-align: center;  
+  text-align: center;
+  min-width: 800px;
 }
 
 .iframe_graph {
@@ -64,8 +65,10 @@
 }
 
 .iframe_about {
-  text-align: center;  
+  text-align: center;
+  min-width: 800px;  
   min-height: 100px;
+  width: 1800px;
 }
 
 .graph {

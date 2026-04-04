@@ -53,15 +53,11 @@ def read_body(body: list[str], fc: Graph):
             print('Error: couldnt find: ' + T)
         else:
             _t = _line.split(T)
-            print(_t)
 
             _source = _t[0]
             _target = _t[1]
 
             _e, _nodes = read_edge(left=_source, right=_target)
-
-            print(_e)
-            print(_nodes)
 
             fc.edges.append(_e)
             for _node in _nodes:

@@ -8,7 +8,7 @@ def prepare_labels(graph_renderer) -> LabelSet:
 
     labels = LabelSet(x='x',
                       y='y',
-                      text='index',
+                      text='name',
                       level='glyph',
                       source=graph_renderer.node_renderer.data_source)
 
