@@ -1,0 +1,12 @@
+{% extends '__base.html' %}
+
+{% block head %}
+{{ js_resources|indent(4)|safe }}
+{{ css_resources|indent(4)|safe }}
+
+{{ script|indent(4)|safe }}
+{% endblock head %}
+
+{% block body %}
+{{ div|indent(4)|safe }}
+{% endblock body %}

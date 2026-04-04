@@ -42,13 +42,16 @@ def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 
     import graph
 
     p = Plot(
-        width=plot_width,
-        height=plot_height,
+        min_width=800,
+        min_height=800,
         x_range=Range1d(-1.1, 1.1),
         y_range=Range1d(-1.1, 1.1),
         toolbar_location='below',
         toolbar_sticky=False,
-        align='center'
+        align='center',
+        margin=5,
+        resizable=True,
+        sizing_mode='scale_both'
     )
     p.title.text = plot_title
     p.toolbar.autohide = False

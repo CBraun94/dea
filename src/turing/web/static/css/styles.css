@@ -37,16 +37,28 @@
   min-height: 100px;
 }
 
-.container div.graph {
+.graph {
   min-height: 600px;
   min-width: 600px;
   margin: 0 auto;
   text-align: center; 
 }
 
-.container div.graph {
+.container div.iframe {
   min-height: 600px;
   min-width: 600px;
-  margin: 0 auto;
-  text-align: center; 
+  resize: none;
+  overflow: auto;
+}
+
+.iframe_graph {
+  min-height: 850px;
+  min-width: 850px;
+  resize: both;
+  overflow: auto;
+}
+
+.iframe_about {
+  text-align: center;  
+  min-height: 100px;
 }

@@ -30,7 +30,7 @@ def prepare_template_about():
     return html
 
 
-@app.route('/')
+@app.route('/graph')
 def prepare_template_graph():
     import web_net as wb
     p = wb.get_netgraph(G=wb.get_net_data(), plot_title='state diagram')
@@ -40,12 +40,22 @@ def prepare_template_graph():
     js_resources, css_resources = prepare_inline()
 
     html = render_template(
-        template_name_or_list=template_html,
+        template_name_or_list='__base_graph.html',
         script=script_graph,
         div=div_graph,
         js_resources=js_resources,
-        css_resources=css_resources,
-        iframe='/about'
+        css_resources=css_resources
+    )
+
+    return html
+
+
+@app.route('/')
+def prepare_template_ide():
+    html = render_template(
+        template_name_or_list=template_html,
+        iframe_graph='/graph',
+        iframe_about='/about'
     )
 
     return html
