@@ -33,6 +33,7 @@
 
 .container div.graph {
   min-height: 600px;
+  min-width: 600px;
   margin: 0 auto;
   text-align: center; 
 }
