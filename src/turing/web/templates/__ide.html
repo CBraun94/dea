@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>test</title>
+
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
+
+  {{ js_resources|indent(4)|safe }}
+  {{ css_resources|indent(4)|safe }}
+  {% block header_scripts %} 
+  {% endblock header_scripts %}
+</head>
+
+<body>
+  <div class="container">
+  <div class="header">
+    {% block header %} 
+    {% endblock header %}
+  </div>
+  <div class="menu">
+    {% block menu %} 
+    {% endblock menu %}
+  </div>
+  <div class="content">
+    {% block content %} 
+    {% endblock content %}
+  </div>
+  <div class="tools">
+    {% block tools %} 
+    {% endblock tools %}
+  </div>
+  <div class="footer">
+    {% block footer %} 
+    {% endblock footer %}
+  </div>
+  </div>
+</body>
+</html>

@@ -38,6 +38,7 @@ def prepare_template_graph():
         div=div_graph,
         js_resources=js_resources,
         css_resources=css_resources,
+        iframe='http://google.com/'
     )
 
     return html
