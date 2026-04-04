@@ -52,9 +52,7 @@ def prepare_tools():
     return tools
 
 
-def get_netgraph(plot_width: int = 800, plot_height: int = 800):
-    G = get_net_data()
-
+def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 800, plot_height: int = 800):
     p = Plot(
         width=plot_width,
         height=plot_height,
@@ -64,7 +62,7 @@ def get_netgraph(plot_width: int = 800, plot_height: int = 800):
         toolbar_sticky=False,
         align='center'
     )
-    p.title.text = "DFA"
+    p.title.text = plot_title
     p.toolbar.autohide = False
     p.toolbar.logo = None
 

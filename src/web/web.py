@@ -29,7 +29,7 @@ def prepare_inline() -> tuple[str, str]:
 @app.route('/')
 def prepare_template_graph():
     import web_net as wb
-    p = wb.get_netgraph()
+    p = wb.get_netgraph(G=wb.get_net_data(), plot_title='state diagram')
 
     script_graph, div_graph = prepare_compontents_graph(p=p)
 
