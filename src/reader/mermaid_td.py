@@ -8,11 +8,11 @@ N = '[*]'
 
 testttt = r'/(<index>[a-zA-Z]+)'
 
-re_bracket_curly = r'\{([^}]+)\}'
-re_bracket_rect = r'\[([^]]+)\]'
-re_bracket_round = r'\(([^)]+)\)'
-re_string = r'([A-Za-z]+)'
-re_bars = r'\|([^|]+)\|'
+re_bracket_curly = r'\{(?P<name>[^}]+)\}'
+re_bracket_rect = r'\[(?P<name>[^]]+)\]'
+re_bracket_round = r'\((?P<name>[^)]+)\)'
+re_string = r'(?P<index>[A-Za-z]+)'
+re_bars = r'\|(?P<label>[^|]+)\|'
 
 RE_STRING = re.compile(re_string)
 
@@ -61,9 +61,14 @@ def read_target(text: str):
     target_node_shape: str = None
     edge_label: str = None
 
+
+    ss = None
+
     aa = RE_STRING.findall(_target)
 
-    ss = RE_RECT_ROUND.findall(_target)
+    sss = RE_RECT_ROUND.search(_target)
+    if sss is not None:
+        ss = sss.group('name')
     ff = RE_RECT.findall(_target)
     bb = RE_DIA.findall(_target)
 
