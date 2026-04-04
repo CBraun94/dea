@@ -5,7 +5,7 @@ from typing import Dict, List, Optional
 @dataclass
 class Node:
     id: str
-    label: Optional[str] = None
+    name: Optional[str] = None
     shape: Optional[str] = None
 
 
@@ -13,11 +13,15 @@ class Node:
 class Edge:
     source: str
     target: str
-    label: Optional[str] = None
+    name: Optional[str] = None
 
 
 @dataclass
-class Flowchart:
-    direction: str
+class Graph:
     nodes: Dict[str, Node]
     edges: List[Edge]
+    direction: Optional[str] = None
+
+    def __init__(self, nodes={}, edges=[]):
+        self.nodes = nodes
+        self.edges = edges

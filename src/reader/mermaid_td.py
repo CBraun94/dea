@@ -1,5 +1,12 @@
 import re
-from graph import Node, Edge, Flowchart
+from graph import Node, Edge, Graph
+
+mermaid = """flowchart TD
+        A[Christmas] -->|Get money| B(Go shopping)
+        B --> C{Let me think}
+        C -->|One| D[Laptop]
+        C -->|Two| E[iPhone]
+        C -->|Three| F[fa:fa-car Car]"""
 
 S = 'flowchart'
 T = '-->'
@@ -30,7 +37,7 @@ def read(path: str = '') -> list[str]:
     return _f
 
 
-def read_head(head: str, fc: Flowchart) -> bool:
+def read_head(head: str, fc: Graph) -> bool:
     _r: bool = False
     if head.startswith(S):
         _r = True
@@ -38,7 +45,7 @@ def read_head(head: str, fc: Flowchart) -> bool:
     return _r
 
 
-def read_body(body: list[str], fc: Flowchart):
+def read_body(body: list[str], fc: Graph):
     for __l in body:
         _line = __l.strip()
         if _line.find(T) == -1:
@@ -58,8 +65,8 @@ def read_body(body: list[str], fc: Flowchart):
             fc.edges.append(_e)
             for _node in _nodes:
                 if _node.id in fc.nodes:
-                    if _node.label is not None:
-                        fc.nodes[_node.id].label = _node.label
+                    if _node.name is not None:
+                        fc.nodes[_node.id].name = _node.name
                     if _node.shape is not None:
                         fc.nodes[_node.id].shape = _node.shape
                 else:
@@ -125,19 +132,19 @@ def read_edge(left: str, right: str) -> tuple[Edge, list[Node]]:
         target_node_index = b.group('index')
         target_node_shape = 'diamond'
 
-    _r = Edge(source=source_node_index, target=target_node_index, label=edge_label)
+    _r = Edge(source=source_node_index, target=target_node_index, name=edge_label)
 
     return _r, [
-        Node(id=source_node_index, label=source_node_name, shape=source_node_shape),
-        Node(id=target_node_index, label=target_node_name, shape=target_node_shape)
+        Node(id=source_node_index, name=source_node_name, shape=source_node_shape),
+        Node(id=target_node_index, name=target_node_name, shape=target_node_shape)
         ]
 
 
-def read_mermaid_flowchart(lines: list[str]) -> Flowchart:
+def read_mermaid_flowchart(lines: list[str]) -> Graph:
     head = lines[0].strip()
     body = lines[1:]
 
-    _r: Flowchart = Flowchart(direction='', nodes={}, edges=[])
+    _r: Graph = Graph()
 
     if read_head(head=head, fc=_r):
         read_body(body=body, fc=_r)
@@ -146,20 +153,13 @@ def read_mermaid_flowchart(lines: list[str]) -> Flowchart:
 
 
 if __name__ == "__main__":
-    mermaid = """flowchart TD
-        A[Christmas] -->|Get money| B(Go shopping)
-        B --> C{Let me think}
-        C -->|One| D[Laptop]
-        C -->|Two| E[iPhone]
-        C -->|Three| F[fa:fa-car Car]"""
-
     chart = read_mermaid_flowchart(mermaid.splitlines())
 
     print("Direction:", chart.direction)
     print("\nNodes:")
     for n in chart.nodes.values():
-        print(f"  {n.id}: label='{n.label}', shape='{n.shape}'")
+        print(f"  {n.id}: label='{n.name}', shape='{n.shape}'")
 
     print("\nEdges:")
     for e in chart.edges:
-        print(f"  {e.source} -> {e.target} (label={e.label})")
+        print(f"  {e.source} -> {e.target} (label={e.name})")
