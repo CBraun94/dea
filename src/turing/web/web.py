@@ -22,6 +22,12 @@ def prepare_inline() -> tuple[str, str]:
 
     return js_resources, css_resources
 
+@app.route('/about')
+def prepare_template_about():
+    html = render_template(
+        template_name_or_list='about.html')
+    return html
+
 
 @app.route('/')
 def prepare_template_graph():
@@ -38,7 +44,7 @@ def prepare_template_graph():
         div=div_graph,
         js_resources=js_resources,
         css_resources=css_resources,
-        iframe='http://google.com/'
+        iframe='/about'
     )
 
     return html

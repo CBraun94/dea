@@ -34,6 +34,14 @@
 .container div.footer {
   grid-area: footer;
   text-align: center;  
+  min-height: 100px;
+}
+
+.container div.graph {
+  min-height: 600px;
+  min-width: 600px;
+  margin: 0 auto;
+  text-align: center; 
 }
 
 .container div.graph {
