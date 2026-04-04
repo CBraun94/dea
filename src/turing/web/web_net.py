@@ -38,18 +38,24 @@ def prepare_tools():
     return tools
 
 
-def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 800, plot_height: int = 800):
+def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 400, plot_height: int = 400):
     import graph
 
     p = Plot(
-        x_range=Range1d(-1.1, 1.1),
-        y_range=Range1d(-1.1, 1.1),
+        width=plot_width,
+        height=plot_height,
+        min_width=200,
+        min_height=200,
+        max_width=1200,
+        max_height=800,
         toolbar_location='below',
         toolbar_sticky=False,
         align='center',
-        margin=5,
         resizable=True,
-        sizing_mode='scale_both'
+        sizing_mode='scale_both',
+        aspect_ratio=None,
+        height_policy='max',
+        width_policy='max'
     )
     p.title.text = plot_title
     p.toolbar.autohide = False
