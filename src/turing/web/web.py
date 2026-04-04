@@ -1,8 +1,4 @@
 from flask import Flask, render_template
-
-from bokeh.embed import components
-from bokeh.plotting import figure
-
 from bokeh.models import Plot
 
 
@@ -12,6 +8,7 @@ app = Flask(__name__)
 
 
 def prepare_compontents_graph(p: Plot) -> tuple[str, str]:
+    from bokeh.embed import components
     script_graph, div_graph = components(p)
 
     return script_graph, div_graph
