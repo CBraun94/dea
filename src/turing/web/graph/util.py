@@ -10,6 +10,7 @@ def prepare_labels(graph_renderer) -> LabelSet:
                       y='y',
                       text='name',
                       level='glyph',
-                      source=graph_renderer.node_renderer.data_source)
+                      source=graph_renderer.node_renderer.data_source,
+                      text_color="#FFFFFF")
 
     return labels
