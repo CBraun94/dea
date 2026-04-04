@@ -63,7 +63,7 @@ def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 
         aspect_ratio=None,
         height_policy='max',
         width_policy='max',
-        match_aspect=True,
+        match_aspect=True
     )
     p.title.text = plot_title
     p.toolbar.autohide = False
