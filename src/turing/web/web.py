@@ -31,6 +31,28 @@ def prepare_inline() -> tuple[str, str]:
     return js_resources, css_resources
 
 
+@app.route('/ide')
+def index():
+    return render_template('ide_py.html')
+
+
+@app.route('/ide/run', methods=['POST'])
+def run_code():
+    from flask import request, jsonify
+    from io import StringIO
+    code = request.json['code']
+    old_stdout = sys.stdout
+    redirected_output = sys.stdout = StringIO()
+
+    try:
+        exec(code)
+        sys.stdout = old_stdout
+        return jsonify({'output': redirected_output.getvalue()})
+    except Exception as e:
+        sys.stdout = old_stdout
+        return jsonify({'output': str(e)})
+
+
 @app.route('/about')
 def prepare_template_about():
     html = render_template(
@@ -65,7 +87,7 @@ def prepare_template_ide():
     html = render_template(
         template_name_or_list=template_html,
         iframe_graph='/graph',
-        iframe_about='/about'
+        iframe_about='/ide'
     )
 
     return html
