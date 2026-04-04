@@ -31,7 +31,7 @@ def get_net_data():
 
 
 def prepare_tools():
-    node_hover_tool = HoverTool(tooltips=[("name", "@index"), ("club", "@club")])
+    node_hover_tool = HoverTool(tooltips=[("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")])
     node_tap_tool = TapTool()
     tools = [node_hover_tool, ResetTool(), WheelZoomTool(), PanTool(), node_tap_tool]
 
