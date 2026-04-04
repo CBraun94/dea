@@ -50,42 +50,87 @@ def read_body(body: list[str], fc: Flowchart):
             _source = _t[0]
             _target = _t[1]
 
-            read_target(text=_target)
+            _e, _nodes = read_edge(left=_source, right=_target)
+
+            print(_e)
+            print(_nodes)
+
+            fc.edges.append(_e)
+            for _node in _nodes:
+                if _node.id in fc.nodes:
+                    if _node.label is not None:
+                        fc.nodes[_node.id].label = _node.label
+                    if _node.shape is not None:
+                        fc.nodes[_node.id].shape = _node.shape
+                else:
+                    fc.nodes[_node.id] = _node
 
 
-def read_target(text: str):
-    _target = text
+def read_edge(left: str, right: str) -> tuple[Edge, list[Node]]:
+    _source = left
+    _target = right
 
-    target_node_id: str = None
+    source_node_index: str = None
+    source_node_name: str = None
+    source_node_shape: str = None
+
+    target_node_index: str = None
     target_node_name: str = None
     target_node_shape: str = None
+
     edge_label: str = None
 
+    aa = RE_LABEL.search(_source)
+    if aa is not None:
+        edge_label = aa.group('label')
 
-    ss = None
+    sss = RE_RECT_ROUND.search(_source)
+    if sss is not None:
+        source_node_name = sss.group('name')
+        source_node_index = sss.group('index')
+        source_node_shape = 'rect_round'
+    f = RE_RECT.search(_source)
+    if f is not None:
+        source_node_name = f.group('name')
+        source_node_index = f.group('index')
+        source_node_shape = 'rect'
+    b = RE_DIA.search(_source)
+    if b is not None:
+        source_node_name = b.group('name')
+        source_node_index = b.group('index')
+        source_node_shape = 'diamond'
 
-    aa = RE_STRING.findall(_target)
+    if source_node_index is None:
+        n = RE_STRING.search(_source)
+        if n is not None:
+            source_node_index = n.group('index')
+
+    aa = RE_LABEL.search(_target)
+    if aa is not None:
+        edge_label = aa.group('label')
 
     sss = RE_RECT_ROUND.search(_target)
     if sss is not None:
-        ss = sss.group('name')
-    ff = RE_RECT.findall(_target)
-    bb = RE_DIA.findall(_target)
-
-    print('test')
-
-def read_targets(text: str):
-    if len(ss) > 0:
-        target_node_name = ss
+        target_node_name = sss.group('name')
+        target_node_index = sss.group('index')
         target_node_shape = 'rect_round'
-    elif len(ff) > 0:
-        target_node_name = ff
+    f = RE_RECT.search(_target)
+    if f is not None:
+        target_node_name = f.group('name')
+        target_node_index = f.group('index')
         target_node_shape = 'rect'
-    elif len(bb) > 0:
-        target_node_name = bb
+    b = RE_DIA.search(_target)
+    if b is not None:
+        target_node_name = b.group('name')
+        target_node_index = b.group('index')
         target_node_shape = 'diamond'
-    else:
-        raise ValueError()
+
+    _r = Edge(source=source_node_index, target=target_node_index, label=edge_label)
+
+    return _r, [
+        Node(id=source_node_index, label=source_node_name, shape=source_node_shape),
+        Node(id=target_node_index, label=target_node_name, shape=target_node_shape)
+        ]
 
 
 def read_mermaid_flowchart(lines: list[str]) -> Flowchart:
@@ -106,8 +151,7 @@ if __name__ == "__main__":
         B --> C{Let me think}
         C -->|One| D[Laptop]
         C -->|Two| E[iPhone]
-        C -->|Three| F[fa:fa-car Car]
-    """
+        C -->|Three| F[fa:fa-car Car]"""
 
     chart = read_mermaid_flowchart(mermaid.splitlines())
 
