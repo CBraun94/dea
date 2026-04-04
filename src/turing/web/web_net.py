@@ -42,8 +42,6 @@ def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 
     import graph
 
     p = Plot(
-        min_width=800,
-        min_height=800,
         x_range=Range1d(-1.1, 1.1),
         y_range=Range1d(-1.1, 1.1),
         toolbar_location='below',
