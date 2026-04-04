@@ -37,7 +37,7 @@ def prepare_labels(graph_renderer):
     return labels
 
 
-def get_netgraph(plot_width: int = 800, plot_height: int = 800):
+def get_netgraph(plot_width: int = 400, plot_height: int = 400):
 
     # Prepare Data
     G = get_net_data()

@@ -1,0 +1,35 @@
+#left { float: left;width: 200px; }
+#right { float: right;width: 200px; }
+
+.main {
+    width: 600px;
+    height: 100%;
+    display: inline-block;
+}
+
+.links_rechts {
+    width: 200px;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    background-color: blue;    
+}
+
+.mitte {
+    width: 200px;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    background-color: magenta;    
+}
+
+div.mycontainer {
+  width:100%;
+  overflow:auto;
+  height: 100%;
+}
+div.mycontainer div {
+  width:33%;  
+  float:left;
+  height: 100%;
+}

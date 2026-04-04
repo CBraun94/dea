@@ -8,6 +8,7 @@ N = '[*]'
 
 RE_T = re.compile(r'\(([^)]+)\)')
 RE_A = re.compile(r'\[([^]]+)\]')
+RE_B = re.compile(r'\{([^}]+)\}')
 
 
 @dataclass
@@ -62,6 +63,9 @@ def read_body(body: list[str], fc:Flowchart):
 
             ff = RE_A.findall(_target)
             print(ff)
+
+            bb = RE_B.findall(_target)
+            print(bb)
 
 
 def read_mermaid_flowchart(lines: list[str]) -> Flowchart:

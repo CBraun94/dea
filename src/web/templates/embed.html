@@ -4,14 +4,22 @@
 <head>
   <meta charset="utf-8">
   <title>test</title>
+
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
+
   {{ js_resources|indent(4)|safe }}
   {{ css_resources|indent(4)|safe }}
   {{ script|indent(4)|safe }}
 </head>
 
 <body>
-  <div>
-  {{ div|indent(4)|safe }}
-  </div>
+    </div class="mycontainer">
+        
+        <div>links</div>
+        <div>
+          {{ div|indent(4)|safe }}
+        </div>
+        <div>Rechts</div>
+    </div>
 </body>
 </html>
