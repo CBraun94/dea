@@ -13,7 +13,13 @@ bp_p_graph = Blueprint('bp_p_graph', __name__)
 
 def prepare_compontents_graph(p: Plot) -> tuple[str, str]:
     from bokeh.embed import components
-    script_graph, div_graph = components(p)
+    from bokeh import themes
+    from bokeh.plotting import curdoc
+
+    curdoc().theme = 'carbon'
+    curdoc().add_root(p)
+
+    script_graph, div_graph = components(p, theme='carbon')
 
     return script_graph, div_graph
 

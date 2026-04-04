@@ -42,7 +42,11 @@ def prepare_tools():
 def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 400, plot_height: int = 400):
     import graph
     import math
-    from bokeh.plotting import from_networkx
+    from bokeh.plotting import from_networkx, curdoc
+
+    from bokeh import themes
+
+    alpha = 1.0
 
     p = Plot(
         width=plot_width,
@@ -58,7 +62,8 @@ def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 
         sizing_mode='scale_both',
         aspect_ratio=None,
         height_policy='max',
-        width_policy='max'
+        width_policy='max',
+        match_aspect=True,
     )
     p.title.text = plot_title
     p.toolbar.autohide = False
@@ -80,6 +85,9 @@ def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 
     elif __layout == 'graphviz':
         graph_renderer = from_networkx(graph=G, layout_function=graphviz_layout, prog='dot')
         graph_renderer.node_renderer.glyph = Circle(radius=3)
+    
+    
+    #graph_renderer.apply_theme(themes._carbon.json)
 
     labels = graph.util.prepare_labels(graph_renderer=graph_renderer)
 
