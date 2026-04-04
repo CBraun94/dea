@@ -41,7 +41,7 @@ def bokeh():
 
 @app.route('/')
 def test():
-    import web_net as wb
+    import turing.web.web_net as wb
     p = wb.get_netgraph()
     script, div = components(p)
 

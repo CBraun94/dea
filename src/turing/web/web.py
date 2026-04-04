@@ -6,7 +6,7 @@ from bokeh.plotting import figure
 from bokeh.models import Plot
 
 
-template_html = 'embed.html'
+template_html = r'embed.html'
 
 app = Flask(__name__)
 

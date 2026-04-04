@@ -1,3 +1,8 @@
+:root{
+  --bg_color: white;
+  --border_bg_color: dodgerblue;
+}
+
 .container {
   display: grid;
   grid-template-areas:
@@ -6,11 +11,11 @@
     "footer footer footer";
   grid-template-columns: 1fr 3fr;
   gap: 3px;
-  background-color: dodgerblue;
+  background-color: var(--border_bg_color);
   padding: 5px;
 }
 .container div {
-  background-color: white;
+  background-color: var(--bg_color);
   padding: 10px;
 }
 .container div.header {
