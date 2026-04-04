@@ -74,11 +74,7 @@ def bkapp(doc):
     doc.theme = 'carbon'
     G = wb.get_net_data()
     G = r.graph.graph_to_nx(r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines()))
-    p = wb.get_netgraph(G=G, plot_title='state2 diagram')
-
-    doc.add_root(p)
-
-    doc.theme = 'carbon'
+    p = wb.get_netgraph(G=G, doc=doc, plot_title='state2 diagram')
 
 
 @bp_p_graph.route('/graph', methods=['GET'])

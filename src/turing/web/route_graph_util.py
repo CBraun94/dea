@@ -17,6 +17,8 @@ from bokeh.models import (
     ToolbarPanel,
 )
 
+from bokeh.plotting import figure
+
 
 def get_net_data():
     G = nx.MultiDiGraph()
@@ -39,7 +41,7 @@ def prepare_tools():
     return tools
 
 
-def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 400, plot_height: int = 400):
+def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None, plot_width: int = 400, plot_height: int = 400):
     import graph
     import math
     from bokeh.plotting import from_networkx, curdoc
@@ -48,7 +50,7 @@ def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 
 
     alpha = 1.0
 
-    p = Plot(
+    p = figure(
         width=plot_width,
         height=plot_height,
         min_width=200,
@@ -73,6 +75,10 @@ def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 
 
     p.tools = tools
 
+    if doc is not None:
+        doc.add_root(p)
+        doc.theme = 'carbon'
+
     graph_renderer = None
     __layout: str = 'graphviz'
 
@@ -85,8 +91,8 @@ def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 
     elif __layout == 'graphviz':
         graph_renderer = from_networkx(graph=G, layout_function=graphviz_layout, prog='dot')
         graph_renderer.node_renderer.glyph = Circle(radius=3)
-    
-    
+
+    graph_renderer.node_renderer.data_source.data['index'] = list(G.nodes())
     #graph_renderer.apply_theme(themes._carbon.json)
 
     labels = graph.util.prepare_labels(graph_renderer=graph_renderer)
