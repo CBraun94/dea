@@ -7,6 +7,7 @@ sys.path.append(SCRIPT_DIR)
 import reader as r
 
 import route_about as r_a
+import route_ide as r_ide
 
 from flask import Flask, render_template
 from bokeh.models import Plot
@@ -16,6 +17,7 @@ template_html = r'embed.html'
 
 app = Flask(__name__)
 app.register_blueprint(r_a.bp_p_about)
+app.register_blueprint(r_ide.bp_p_ide)
 
 
 def prepare_compontents_graph(p: Plot) -> tuple[str, str]:
@@ -32,31 +34,6 @@ def prepare_inline() -> tuple[str, str]:
     css_resources = INLINE.render_css()
 
     return js_resources, css_resources
-
-
-@app.route('/ide')
-def index():
-    return render_template('ide_py.html')
-
-
-@app.route('/ide/run', methods=['POST'])
-def run_code():
-    from flask import request, jsonify
-    from io import StringIO
-    code = request.json['code']
-    old_stdout = sys.stdout
-    redirected_output = sys.stdout = StringIO()
-
-    try:
-        exec(code)
-        sys.stdout = old_stdout
-        return jsonify({'output': redirected_output.getvalue()})
-    except Exception as e:
-        sys.stdout = old_stdout
-        return jsonify({'output': str(e)})
-
-
-
 
 
 @app.route('/graph')
