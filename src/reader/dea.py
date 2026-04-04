@@ -1,4 +1,4 @@
-import mermaid_reader as mr
+import reader.mermaid_reader as mr
 
 
 NONE = '__none'

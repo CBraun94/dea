@@ -34,7 +34,7 @@ def mermaid_state_to_dict(lines: list[str]) -> dict:
 
 
 if __name__ == '__main__':
-    import dea
+    import reader.dea as dea
     _l = read(r'/home/chris/dev/dea/src/test.mermaid')
     _d = mermaid_state_to_dict(_l)
 

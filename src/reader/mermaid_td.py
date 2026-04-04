@@ -1,33 +1,25 @@
 import re
-from dataclasses import dataclass
-from typing import Dict, List, Optional
+from graph import Node, Edge, Flowchart
 
 S = 'flowchart'
 T = '-->'
 N = '[*]'
 
-RE_RECT_ROUND = re.compile(r'\(([^)]+)\)')
-RE_RECT = re.compile(r'\[([^]]+)\]')
-RE_DIA = re.compile(r'\{([^}]+)\}')
 
+testttt = r'/(<index>[a-zA-Z]+)'
 
-@dataclass
-class Node:
-    id: str
-    label: Optional[str] = None
-    shape: Optional[str] = None
+re_bracket_curly = r'\{([^}]+)\}'
+re_bracket_rect = r'\[([^]]+)\]'
+re_bracket_round = r'\(([^)]+)\)'
+re_string = r'([A-Za-z]+)'
+re_bars = r'\|([^|]+)\|'
 
-@dataclass
-class Edge:
-    source: str
-    target: str
-    label: Optional[str] = None
+RE_STRING = re.compile(re_string)
 
-@dataclass
-class Flowchart:
-    direction: str
-    nodes: Dict[str, Node]
-    edges: List[Edge]
+RE_LABEL = re.compile(re_bars)
+RE_RECT_ROUND = re.compile(re_string+re_bracket_round)
+RE_RECT = re.compile(re_string+re_bracket_rect)
+RE_DIA = re.compile(re_string+re_bracket_curly)
 
 
 def read(path: str = '') -> list[str]:
@@ -38,7 +30,7 @@ def read(path: str = '') -> list[str]:
     return _f
 
 
-def read_head(head: str, fc:Flowchart) -> bool:
+def read_head(head: str, fc: Flowchart) -> bool:
     _r: bool = False
     if head.startswith(S):
         _r = True
@@ -46,7 +38,7 @@ def read_head(head: str, fc:Flowchart) -> bool:
     return _r
 
 
-def read_body(body: list[str], fc:Flowchart):
+def read_body(body: list[str], fc: Flowchart):
     for __l in body:
         _line = __l.strip()
         if _line.find(T) == -1:
@@ -58,14 +50,37 @@ def read_body(body: list[str], fc:Flowchart):
             _source = _t[0]
             _target = _t[1]
 
-            ss = RE_RECT_ROUND.findall(_target)
-            print(ss)
+            read_target(text=_target)
 
-            ff = RE_RECT.findall(_target)
-            print(ff)
 
-            bb = RE_DIA.findall(_target)
-            print(bb)
+def read_target(text: str):
+    _target = text
+
+    target_node_id: str = None
+    target_node_name: str = None
+    target_node_shape: str = None
+    edge_label: str = None
+
+    aa = RE_STRING.findall(_target)
+
+    ss = RE_RECT_ROUND.findall(_target)
+    ff = RE_RECT.findall(_target)
+    bb = RE_DIA.findall(_target)
+
+    print('test')
+
+def read_targets(text: str):
+    if len(ss) > 0:
+        target_node_name = ss
+        target_node_shape = 'rect_round'
+    elif len(ff) > 0:
+        target_node_name = ff
+        target_node_shape = 'rect'
+    elif len(bb) > 0:
+        target_node_name = bb
+        target_node_shape = 'diamond'
+    else:
+        raise ValueError()
 
 
 def read_mermaid_flowchart(lines: list[str]) -> Flowchart:
