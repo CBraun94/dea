@@ -22,6 +22,7 @@ def prepare_inline() -> tuple[str, str]:
 
     return js_resources, css_resources
 
+
 @app.route('/about')
 def prepare_template_about():
     html = render_template(
