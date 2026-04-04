@@ -53,6 +53,8 @@ def prepare_tools():
 
 
 def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 800, plot_height: int = 800):
+    from graph.util import prepare_labels
+    
     p = Plot(
         width=plot_width,
         height=plot_height,
