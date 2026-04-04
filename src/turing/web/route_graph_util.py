@@ -16,8 +16,6 @@ from bokeh.models import (
     Toolbar,
     ToolbarPanel,
 )
-from bokeh.plotting import from_networkx
-from bokeh.layouts import layout, row
 
 
 def get_net_data():
@@ -33,7 +31,8 @@ def get_net_data():
 
 
 def prepare_tools():
-    node_hover_tool = HoverTool(tooltips=[("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")])
+    tooltips = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
+    node_hover_tool = HoverTool(tooltips=tooltips)
     node_tap_tool = TapTool()
     tools = [node_hover_tool, ResetTool(), WheelZoomTool(), PanTool(), node_tap_tool]
 
@@ -43,6 +42,7 @@ def prepare_tools():
 def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 400, plot_height: int = 400):
     import graph
     import math
+    from bokeh.plotting import from_networkx
 
     p = Plot(
         width=plot_width,

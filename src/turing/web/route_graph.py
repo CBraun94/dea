@@ -30,7 +30,7 @@ def prepare_inline() -> tuple[str, str]:
 @bp_p_graph.route('/graph')
 def prepare_template_graph():
     from flask import render_template
-    import web_net as wb
+    import route_graph_util as wb
     G = wb.get_net_data()
     G = r.graph.graph_to_nx(r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines()))
     p = wb.get_netgraph(G=G, plot_title='state diagram')
