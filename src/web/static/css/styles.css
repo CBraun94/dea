@@ -33,4 +33,5 @@
 
 .container div.graph {
   min-height: 600px;
+  margin: 0 auto;
 }

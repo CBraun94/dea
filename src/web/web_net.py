@@ -61,7 +61,8 @@ def get_netgraph(plot_width: int = 800, plot_height: int = 800):
         x_range=Range1d(-1.1, 1.1),
         y_range=Range1d(-1.1, 1.1),
         toolbar_location='below',
-        toolbar_sticky=False
+        toolbar_sticky=False,
+        align='center'
     )
     p.title.text = "DFA"
     p.toolbar.autohide = False
