@@ -51,8 +51,7 @@ def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None, plot_w
     alpha = 1.0
 
     p = figure(
-        width=plot_width,
-        height=plot_height,
+
         min_width=200,
         min_height=200,
         max_width=1200,
@@ -90,15 +89,15 @@ def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None, plot_w
         graph_renderer.node_renderer.glyph = Circle(radius=0.03)
     elif __layout == 'graphviz':
         graph_renderer = from_networkx(graph=G, layout_function=graphviz_layout, prog='dot')
-        graph_renderer.node_renderer.glyph = Circle(radius=3)
+        #graph_renderer.node_renderer.glyph = Circle(radius=3)
 
     graph_renderer.node_renderer.data_source.data['index'] = list(G.nodes())
     #graph_renderer.apply_theme(themes._carbon.json)
 
-    labels = graph.util.prepare_labels(graph_renderer=graph_renderer)
+    #labels = graph.util.prepare_labels(graph_renderer=graph_renderer)
 
     p.renderers.append(graph_renderer)
 
-    p.renderers.append(labels)
+    #p.renderers.append(labels)
 
     return p
