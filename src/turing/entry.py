@@ -1,8 +1,8 @@
-from web import web
+from turing.web import app
 
 
 def main():
-    web.app.run()
+    app.app.run()
 
 
 if __name__ == '__main__':

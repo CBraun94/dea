@@ -6,6 +6,8 @@ sys.path.append(SCRIPT_DIR)
 
 import reader as r
 
+import route_about as r_a
+
 from flask import Flask, render_template
 from bokeh.models import Plot
 
@@ -13,6 +15,7 @@ from bokeh.models import Plot
 template_html = r'embed.html'
 
 app = Flask(__name__)
+app.register_blueprint(r_a.bp_p_about)
 
 
 def prepare_compontents_graph(p: Plot) -> tuple[str, str]:
@@ -53,11 +56,7 @@ def run_code():
         return jsonify({'output': str(e)})
 
 
-@app.route('/about')
-def prepare_template_about():
-    html = render_template(
-        template_name_or_list='about.html')
-    return html
+
 
 
 @app.route('/graph')

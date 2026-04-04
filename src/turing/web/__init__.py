@@ -1,1 +1,1 @@
-from . import web
+from . import app
