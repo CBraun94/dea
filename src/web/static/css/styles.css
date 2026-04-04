@@ -33,3 +33,12 @@ div.mycontainer div {
   float:left;
   height: 100%;
 }
+
+.test {
+    text-align:center;
+    width:800px;
+    margin:0 auto;
+    background-color:red;
+    color:white;
+    padding: 5px;
+}
