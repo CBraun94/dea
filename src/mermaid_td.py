@@ -6,9 +6,9 @@ S = 'flowchart'
 T = '-->'
 N = '[*]'
 
-RE_T = re.compile(r'\(([^)]+)\)')
-RE_A = re.compile(r'\[([^]]+)\]')
-RE_B = re.compile(r'\{([^}]+)\}')
+RE_RECT_ROUND = re.compile(r'\(([^)]+)\)')
+RE_RECT = re.compile(r'\[([^]]+)\]')
+RE_DIA = re.compile(r'\{([^}]+)\}')
 
 
 @dataclass
@@ -58,13 +58,13 @@ def read_body(body: list[str], fc:Flowchart):
             _source = _t[0]
             _target = _t[1]
 
-            ss = RE_T.findall(_target)
+            ss = RE_RECT_ROUND.findall(_target)
             print(ss)
 
-            ff = RE_A.findall(_target)
+            ff = RE_RECT.findall(_target)
             print(ff)
 
-            bb = RE_B.findall(_target)
+            bb = RE_DIA.findall(_target)
             print(bb)
 
 

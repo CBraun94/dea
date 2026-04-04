@@ -10,9 +10,12 @@ from bokeh.models import (
     Plot,
     Range1d,
     ResetTool,
-    LabelSet
+    LabelSet,
+    Toolbar,
+    ToolbarPanel,
 )
 from bokeh.plotting import from_networkx
+from bokeh.layouts import layout, row
 
 
 def get_net_data():
@@ -27,35 +30,46 @@ def get_net_data():
     return G
 
 
-def prepare_labels(graph_renderer):
-    x,y=zip(*graph_renderer.layout_provider.graph_layout.values())
-    graph_renderer.node_renderer.data_source.data['x']=x
-    graph_renderer.node_renderer.data_source.data['y']=y
+def prepare_labels(graph_renderer) -> LabelSet:
+    x, y = zip(*graph_renderer.layout_provider.graph_layout.values())
+    graph_renderer.node_renderer.data_source.data['x'] = x
+    graph_renderer.node_renderer.data_source.data['y'] = y
 
-    labels=LabelSet(x='x', y='y', text='index',level='glyph', source=graph_renderer.node_renderer.data_source)
+    labels = LabelSet(x='x',
+                      y='y',
+                      text='index',
+                      level='glyph',
+                      source=graph_renderer.node_renderer.data_source)
 
     return labels
 
 
-def get_netgraph(plot_width: int = 400, plot_height: int = 400):
+def prepare_tools():
+    node_hover_tool = HoverTool(tooltips=[("name", "@index"), ("club", "@club")])
+    node_tap_tool = TapTool()
+    tools = [node_hover_tool, ResetTool(), WheelZoomTool(), PanTool(), node_tap_tool]
 
-    # Prepare Data
+    return tools
+
+
+def get_netgraph(plot_width: int = 800, plot_height: int = 800):
     G = get_net_data()
 
-
-    # Show with Bokeh
     p = Plot(
         width=plot_width,
         height=plot_height,
         x_range=Range1d(-1.1, 1.1),
         y_range=Range1d(-1.1, 1.1),
+        toolbar_location='below',
+        toolbar_sticky=False
     )
     p.title.text = "DFA"
-    p.toolbar.autohide = True
+    p.toolbar.autohide = False
+    p.toolbar.logo = None
 
-    node_hover_tool = HoverTool(tooltips=[("name", "@index"), ("club", "@club")])
-    node_tap_tool = TapTool()
-    p.add_tools(node_hover_tool, ResetTool(), WheelZoomTool(), PanTool(), node_tap_tool)
+    tools = prepare_tools()
+
+    p.tools = tools
 
     graph_renderer = from_networkx(G, nx.spectral_layout, scale=1, center=(0, 0))
     graph_renderer.node_renderer.glyph = Circle(radius=0.03)

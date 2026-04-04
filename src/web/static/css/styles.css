@@ -1,9 +1,9 @@
 .container {
   display: grid;
   grid-template-areas:
-    "header header"
-    "menu content"
-    "footer footer";
+    "header header header"
+    "menu content tools"
+    "footer footer footer";
   grid-template-columns: 1fr 3fr;
   gap: 3px;
   background-color: dodgerblue;
@@ -23,7 +23,14 @@
 .container div.content {
   grid-area: content;
 }
+.container div.tools {
+  grid-area: tools;
+}
 .container div.footer {
   grid-area: footer;
   text-align: center;  
+}
+
+.container div.graph {
+  min-height: 600px;
 }
