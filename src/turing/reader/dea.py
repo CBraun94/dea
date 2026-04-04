@@ -1,4 +1,4 @@
-import turing.reader.mermaid_reader as mr
+from . import mermaid_reader as mr
 
 
 NONE = '__none'

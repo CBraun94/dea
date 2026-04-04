@@ -38,7 +38,7 @@ def graph_to_nx(graph: Graph) -> nx.Graph:
         G.add_node(_n.id, name=_n.name, shape=_n.shape, docstring=_n.docstring)
 
     for _edge in graph.edges:
-        _e: Edge = graph.edges[_edge]
+        _e: Edge = _edge
         G.add_edge(_e.source, _e.target, name=_e.name, docstring=_e.docstring, weight=1.0)
 
     return G

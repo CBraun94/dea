@@ -1,5 +1,5 @@
 import re
-from turing.reader.graph import Node, Edge, Graph
+from .graph import Node, Edge, Graph
 
 mermaid = """flowchart TD
         A[Christmas] -->|Get money| B(Go shopping)

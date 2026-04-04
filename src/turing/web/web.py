@@ -1,3 +1,11 @@
+import sys
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+sys.path.append(SCRIPT_DIR)
+
+import reader as r
+
 from flask import Flask, render_template
 from bokeh.models import Plot
 
@@ -33,7 +41,9 @@ def prepare_template_about():
 @app.route('/graph')
 def prepare_template_graph():
     import web_net as wb
-    p = wb.get_netgraph(G=wb.get_net_data(), plot_title='state diagram')
+    G = wb.get_net_data()
+    G = r.graph.graph_to_nx(r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines()))
+    p = wb.get_netgraph(G=G, plot_title='state diagram')
 
     script_graph, div_graph = prepare_compontents_graph(p=p)
 
