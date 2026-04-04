@@ -54,7 +54,7 @@ def get_netgraph(G: nx.classes.Graph, plot_title: str = None, plot_width: int = 
         toolbar_location='below',
         toolbar_sticky=False,
         align='center',
-        resizable=True,
+        resizable=False,
         sizing_mode='scale_both',
         aspect_ratio=None,
         height_policy='max',
