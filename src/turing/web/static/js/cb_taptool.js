@@ -11,3 +11,13 @@ for (const property in cb_data.source.data) {
 
 $(div_dst).text(text);
 $(div_dst).text(JSON.stringify(dict));
+
+$.ajax({
+  url: '/graph/select',
+  method: 'POST',
+  contentType: 'application/json',
+  data: JSON.stringify(dict),
+  success: function (response) {
+    $(div_dst).text(response.output);
+  }
+});

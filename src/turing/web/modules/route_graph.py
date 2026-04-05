@@ -42,6 +42,14 @@ def bkapp_page():
     return render_template("__base_graph.html", div=script)
 
 
+@bp_p_graph.route('/graph/select', methods=['POST'])
+def run_code():
+    from flask import request, jsonify
+
+    return request.json
+
+
+
 def bk_worker():
     # Can't pass num_procs > 1 in this configuration. If you need to run multiple
     # processes, see e.g. flask_gunicorn_embed.py
