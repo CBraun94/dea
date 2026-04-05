@@ -33,9 +33,12 @@ def get_net_data():
 
 
 def prepare_tools():
+    from bokeh import events
+    from bokeh.models import CustomJS
+
     tooltips = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
     node_hover_tool = HoverTool(tooltips=tooltips)
-    node_tap_tool = TapTool(behavior='select')
+    node_tap_tool = TapTool(behavior='select',  callback=CustomJS(code="""console.log(cb_data.source.selected.indices[0]);"""))
     tools = [node_hover_tool, ResetTool(), WheelZoomTool(), PanTool(), node_tap_tool]
 
     return tools
@@ -94,6 +97,12 @@ def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None, plot_w
     #graph_renderer.node_renderer.data_source.data['index'] = list(G.nodes())
     #graph_renderer.apply_theme(themes._carbon.json)
 
+    from bokeh import events
+    from bokeh.models import CustomJS
+
+    graph_renderer.node_renderer.data_source.on_change('selected', test)
+    p.on_event(events.SelectionGeometry, aaa)
+
     labels = graph.util.prepare_labels(graph_renderer=graph_renderer)
 
     #graph_renderer.node_renderer.
@@ -103,3 +112,10 @@ def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None, plot_w
     p.renderers.append(labels)
 
     return p
+
+
+def test(attr, old, new):
+    print(test)
+
+def aaa(event):
+    print(event)
