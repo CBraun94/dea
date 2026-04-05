@@ -17,6 +17,7 @@
 .container div.header {
   grid-area: header;
   text-align: center;
+  height: 50px
 }
 .container div.menu {
   grid-area: menu;

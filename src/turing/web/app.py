@@ -15,7 +15,6 @@ app.register_blueprint(m.route_menubar.bp_p_menubar)
 def prepare_template_ide():
     html = render_template(
         template_name_or_list=template_html,
-        iframe_menubar='/menubar',
         iframe_graph='/graph',
         iframe_ide='/ide'
     )
