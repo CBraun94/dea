@@ -9,10 +9,7 @@
   grid-template-rows: auto;
   margin: 0;
 }
-.container div {
-  color: var(--color);
-  background-color: var(--bg_color);
-}
+
 .container div.header {
   grid-area: header;
   text-align: center;
