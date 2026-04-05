@@ -22,6 +22,10 @@ def prepare_template_ide():
     return html
 
 
-if __name__ == '__main__':
+def run():
     t = m.route_graph.init()
     app.run(port=8000)
+
+
+if __name__ == '__main__':
+    run()
