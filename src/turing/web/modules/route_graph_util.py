@@ -38,7 +38,7 @@ def prepare_tools():
 
     tooltips = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
     node_hover_tool = HoverTool(tooltips=tooltips)
-    node_tap_tool = TapTool(behavior='select',  callback=CustomJS(code="""console.log(cb_data.source.selected.indices[0]);"""))
+    node_tap_tool = TapTool(behavior='select',  callback=CustomJS(code="""$("#ttt").text(cb_data.source.data['name'][cb_data.source.selected.indices[0]]);"""))
     tools = [node_hover_tool, ResetTool(), WheelZoomTool(), PanTool(), node_tap_tool]
 
     return tools

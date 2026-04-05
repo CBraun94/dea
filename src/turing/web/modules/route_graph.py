@@ -30,18 +30,6 @@ def bkapp(doc):
     G = r.graph.graph_to_nx(r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines()))
     p = wb.get_netgraph(G=G, doc=doc, plot_title='state2 diagram')
 
-    from bokeh import events
-    from bokeh.models import CustomJS
-    # alert("Hello! I am an alert box!!");
-    #const index = cb_data.source.inspected.indices[0];
-
-    #click_event = CustomJS(code="""$("#ttt").text(JSON.stringify(cb_obj, undefined, 2));""")
-
-    cb_sel_geo = CustomJS(code="""console.log(arguments);""")
-
-    p.js_on_event(events.SelectionGeometry, cb_sel_geo)
-    #p.js_on_event(events.Tap, a)
-
 
 def get_graph_script() -> str:
     script = server_document('http://localhost:5006/bkapp')
