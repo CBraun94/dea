@@ -1,0 +1,39 @@
+.container {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-areas:
+    "header header header"
+    "menu content tools"
+    "footer footer footer";
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  background-color: var(--border_bg_color);
+  margin: 0;
+}
+.container div {
+  color: var(--color);
+  background-color: var(--bg_color);
+}
+.container div.header {
+  grid-area: header;
+  text-align: center;
+}
+.container div.menu {
+  grid-area: menu;
+}
+.container div.content {
+  grid-area: content;
+  min-width: 800px;
+  min-height: 800px;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.container div.tools {
+  grid-area: tools;
+}
+.container div.footer {
+  grid-area: footer;
+  text-align: center;
+  min-width: 800px;
+}
