@@ -1,7 +1,7 @@
-import route_about as r_a
-import route_ide as r_ide
-import route_graph as r_graph
-import route_menubar as r_menubar
+import modules.route_about as r_a
+import modules.route_ide as r_ide
+import modules.route_graph as r_graph
+import modules.route_menubar as r_menubar
 from flask import Flask, render_template
 
 

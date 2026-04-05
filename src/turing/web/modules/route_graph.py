@@ -12,11 +12,10 @@ from bokeh.embed import server_document
 from bokeh.layouts import column
 from bokeh.models import ColumnDataSource, Slider
 from bokeh.plotting import figure
-from bokeh.sampledata.sea_surface_temperature import sea_surface_temperature
 from bokeh.server.server import Server
 from bokeh.themes import Theme
 
-SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 sys.path.append(SCRIPT_DIR)
 
 import reader as r
@@ -49,7 +48,7 @@ def prepare_inline() -> tuple[str, str]:
 @bp_p_graph.route('/graph2')
 def prepare_template_graph():
     from flask import render_template
-    import route_graph_util as wb
+    import turing.web.modules.route_graph_util as wb
     G = wb.get_net_data()
     G = r.graph.graph_to_nx(r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines()))
     p = wb.get_netgraph(G=G, plot_title='state diagram')
@@ -70,7 +69,7 @@ def prepare_template_graph():
 
 
 def bkapp(doc):
-    import route_graph_util as wb
+    import web.modules.route_graph_util as wb
     doc.theme = 'carbon'
     G = wb.get_net_data()
     G = r.graph.graph_to_nx(r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines()))
