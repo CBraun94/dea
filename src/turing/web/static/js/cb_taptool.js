@@ -1,0 +1,1 @@
+$("#ttt").text(cb_data.source.data['name'][cb_data.source.selected.indices[0]]);
