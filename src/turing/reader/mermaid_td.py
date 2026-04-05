@@ -92,7 +92,7 @@ def read_edge(left: str, right: str) -> tuple[Edge, list[Node]]:
     if sss is not None:
         source_node_name = sss.group('name')
         source_node_index = sss.group('index')
-        source_node_shape = 'rect_round'
+        source_node_shape = 'ellipse'
     f = RE_RECT.search(_source)
     if f is not None:
         source_node_name = f.group('name')
@@ -117,7 +117,7 @@ def read_edge(left: str, right: str) -> tuple[Edge, list[Node]]:
     if sss is not None:
         target_node_name = sss.group('name')
         target_node_index = sss.group('index')
-        target_node_shape = 'rect_round'
+        target_node_shape = 'ellipse'
     f = RE_RECT.search(_target)
     if f is not None:
         target_node_name = f.group('name')
