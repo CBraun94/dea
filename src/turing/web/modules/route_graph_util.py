@@ -33,14 +33,9 @@ def get_net_data():
 
 
 def prepare_tools():
-    from bokeh import events
-    from bokeh.models import CustomJS
-
-    a = CustomJS(args={}, code="""console.log("JS:Click"); $("#output").text = "Selection! <p> <p>" + JSON.stringify(cb_obj.geometry, undefined, 2);""")
-
     tooltips = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
     node_hover_tool = HoverTool(tooltips=tooltips)
-    node_tap_tool = TapTool()
+    node_tap_tool = TapTool(behavior='select')
     tools = [node_hover_tool, ResetTool(), WheelZoomTool(), PanTool(), node_tap_tool]
 
     return tools

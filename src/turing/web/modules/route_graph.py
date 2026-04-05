@@ -32,10 +32,15 @@ def bkapp(doc):
 
     from bokeh import events
     from bokeh.models import CustomJS
+    # alert("Hello! I am an alert box!!");
+    #const index = cb_data.source.inspected.indices[0];
 
-    a = CustomJS(code="""alert("Hello! I am an alert box!!");""")
+    click_event = CustomJS(code="""$("#ttt").text(JSON.stringify(cb_obj, undefined, 2));""")
 
-    p.js_on_event(events.Tap, a)
+    cb_sel_geo = CustomJS(code="""$("#ttt").text("Selection! <p> <p>" + JSON.stringify(cb_obj.geometry));console.log(cb_data);console.log(cb_obj);""")
+
+    p.js_on_event(events.SelectionGeometry, cb_sel_geo)
+    #p.js_on_event(events.Tap, a)
 
 
 def get_graph_script() -> str:
