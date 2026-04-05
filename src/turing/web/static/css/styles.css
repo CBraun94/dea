@@ -2,6 +2,7 @@
 @import "styles_ide_grid.css";
 @import "styles_ace.css";
 @import "styles_menubar.css";
+@import "styles_sidebar.css";
 
 .container_iframe {
   width: 100%;
