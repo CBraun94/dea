@@ -6,7 +6,7 @@
   height: 100%;
 }
 
-.container_iframe iframe.iframe_graph {
+.iframe_graph {
   position: absolut;
   min-width: 800px;
   min-height: 800px;
@@ -16,7 +16,7 @@
   height: 100%;
 }
 
-.container_iframe iframe.iframe_ide {
+.iframe_ide {
   text-align: center;
   min-width: 800px;  
   min-height: 400px;
@@ -24,7 +24,7 @@
   height: 100%;
 }
 
-.container_iframe iframe.iframe_menubar {
+.iframe_menubar {
   text-align: center;
   min-width: 800px;  
   min-height: 100px;
