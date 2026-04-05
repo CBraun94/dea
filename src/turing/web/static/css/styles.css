@@ -1,5 +1,6 @@
 @import "styles_base.css";
 @import "styles_ide_grid.css";
+@import "styles_menubar.css";
 
 .container_iframe {
   width: 100%;
