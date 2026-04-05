@@ -36,9 +36,13 @@ def prepare_tools():
     from bokeh import events
     from bokeh.models import CustomJS
 
+    cb_js_code: str = None
+    with open(file='/home/chris/dev/dea/src/turing/web/static/js/cb_taptool.js', mode='r') as f:
+        cb_js_code = f.read()
+
     tooltips = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
     node_hover_tool = HoverTool(tooltips=tooltips)
-    node_tap_tool = TapTool(behavior='select',  callback=CustomJS(code="""$("#ttt").text(cb_data.source.data['name'][cb_data.source.selected.indices[0]]);"""))
+    node_tap_tool = TapTool(behavior='select',  callback=CustomJS(code=cb_js_code))
     tools = [node_hover_tool, ResetTool(), WheelZoomTool(), PanTool(), node_tap_tool]
 
     return tools
