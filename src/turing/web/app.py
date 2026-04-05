@@ -1,17 +1,14 @@
-import modules.route_about as r_a
-import modules.route_ide as r_ide
-import modules.route_graph as r_graph
-import modules.route_menubar as r_menubar
+import modules as m
 from flask import Flask, render_template
 
 
 template_html = r'__ide_gui.html'
 
 app = Flask(__name__)
-app.register_blueprint(r_a.bp_p_about)
-app.register_blueprint(r_ide.bp_p_ide)
-app.register_blueprint(r_graph.bp_p_graph)
-app.register_blueprint(r_menubar.bp_p_menubar)
+app.register_blueprint(m.route_about.bp_p_about)
+app.register_blueprint(m.route_ide.bp_p_ide)
+app.register_blueprint(m.route_graph.bp_p_graph)
+app.register_blueprint(m.route_menubar.bp_p_menubar)
 
 
 @app.route('/')
@@ -27,4 +24,5 @@ def prepare_template_ide():
 
 
 if __name__ == '__main__':
+    t = m.route_graph.init()
     app.run(port=8000)

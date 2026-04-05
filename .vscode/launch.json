@@ -5,6 +5,13 @@
             "type": "debugpy",
             "request": "launch",
             "program": "${file}"
-        }
+        },
+        {
+            "name": "Python Debugger: Module",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "cb",
+            "args": []
+        },
     ]
 }
