@@ -4,54 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Online Editor</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_ide.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_ace.css') }}">
     {% include '__t_ace_header.html' %}
 </head>
 <body>
-    <div id="file-info">
-        Main.py
-    </div>
-    <div class="container">
-        <div id="editor" contenteditable="true"></div>
-        <div id="output"></div>
-    </div>
-    <div class="btn-container">
-        <button class="black-button" id="runButton">
-            <span id="buttonText">Run Code</span>
-            <i class="fas fa-circle-notch fa-spin" id="loadingIcon" style="display: none; margin-left: 10px;"></i>
-        </button>  
-    </div>
-
-    <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.session.setMode("ace/mode/python");
-
-        $("#runButton").click(function() {
-            var code = editor.getValue();
-            $.ajax({
-                url: '/ide/run',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({code: code}),
-                success: function(response) {
-                    $("#output").text(response.output);
-                }
-            });
-        });
-    </script>
-    <script>
-        document.getElementById("runButton").addEventListener("click", function() {
-            var loadingIcon = document.getElementById("loadingIcon");
-
-            // Show the loading icon
-            loadingIcon.style.display = "inline-block";
-
-            // Hide the loading icon after 2 seconds
-            setTimeout(function() {
-                loadingIcon.style.display = "none";
-            }, 1000);
-        });
-    </script>
+{% include '__t_ace_body.html' %}
 </body>
 </html>

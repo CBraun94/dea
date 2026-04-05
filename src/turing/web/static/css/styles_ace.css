@@ -31,7 +31,7 @@
     border-bottom: 1px solid #ccc;
     font-family: monospace;
 }
-.container {
+.container_ace {
     display: flex;
 }
 #editor {
