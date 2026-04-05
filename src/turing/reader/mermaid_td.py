@@ -6,8 +6,7 @@ mermaid = """flowchart TD
         B --> C{Let me think}
         C -->|One| D[Laptop]
         C -->|Two| E[iPhone]
-        C -->|Three| F[Car]
-        """
+        C -->|Three| F[Car]"""
 
 S = 'flowchart'
 T = '-->'

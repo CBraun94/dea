@@ -6,7 +6,7 @@ template_html = r'__ide_gui.html'
 
 app = Flask(__name__)
 app.register_blueprint(m.route_about.bp_p_about)
-app.register_blueprint(m.route_ide.bp_p_ide)
+app.register_blueprint(m.route_ide_ace.bp_p_ide_ace)
 app.register_blueprint(m.route_graph.bp_p_graph)
 app.register_blueprint(m.route_menubar.bp_p_menubar)
 
