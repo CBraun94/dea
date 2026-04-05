@@ -1,19 +1,11 @@
-<!doctype html>
+{% extends '__base.html' %}
 
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-  <title>test</title>
+{% block head %} 
+{% block header_scripts %} 
+{% endblock header_scripts %}
+{% endblock head %} 
 
-  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
-
-  {% block header_scripts %} 
-  {% endblock header_scripts %}
-</head>
-
-<body class="body">
-  
+{% block body %} 
   <div class="container">
   <div class="header">
     {% block header %} 
@@ -36,5 +28,4 @@
     {% endblock footer %}
   </div>
   </div>
-</body>
-</html>
+{% endblock body %}

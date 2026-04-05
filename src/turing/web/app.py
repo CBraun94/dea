@@ -5,7 +5,7 @@ import route_graph as r_graph
 from flask import Flask, render_template
 
 
-template_html = r'embed.html'
+template_html = r'__ide_gui.html'
 
 app = Flask(__name__)
 app.register_blueprint(r_a.bp_p_about)
