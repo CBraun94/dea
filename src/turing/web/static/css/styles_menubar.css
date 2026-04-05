@@ -2,7 +2,7 @@
 .navbar {
   overflow: hidden;
   background-color: #333;
-  font-family: Arial;
+  font-family: monospace;
 }
 
 /* Links inside the navbar */

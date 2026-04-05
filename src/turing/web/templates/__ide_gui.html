@@ -4,7 +4,7 @@
 {% include '__t_ace_header.html' %}
 {% endblock header_scripts %}
 
-{% block header %}
+{% block top %}
 <div class="navbar">
   <a href="#file">File</a>
   <a href="#edit">Edit</a>
@@ -19,24 +19,24 @@
     </div>
   </div>
 </div>
-{% endblock header %}
+{% endblock top %}
 
-{% block menu %}
+{% block left %}
 <a href="#">Link 1</a><br>
 <a href="#">Link 2</a><br>
 <a href="#">Link 3</a>
-{% endblock menu %}
+{% endblock left %}
 
-{% block content %}
+{% block center %}
 {{ script_graph|indent(4)|safe }}
-{% endblock content %}
+{% endblock center %}
 
-{% block tools %}
+{% block right %}
 <a href="#">Link 1</a><br>
 <a href="#">Link 2</a><br>
 <a href="#">Link 3</a>
-{% endblock tools %}
+{% endblock right %}
 
-{% block footer %}
+{% block bottom %}
 {% include '__t_ace_body.html' %}
-{% endblock footer %}
+{% endblock bottom %}
