@@ -13,9 +13,10 @@ app.register_blueprint(m.route_menubar.bp_p_menubar)
 
 @app.route('/')
 def prepare_template_ide():
+    script_graph = m.route_graph.get_graph_script()
     html = render_template(
         template_name_or_list=template_html,
-        iframe_graph='/graph',
+        script_graph=script_graph,
         iframe_ide='/ide'
     )
 

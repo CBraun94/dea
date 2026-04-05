@@ -31,10 +31,15 @@ def bkapp(doc):
     p = wb.get_netgraph(G=G, doc=doc, plot_title='state2 diagram')
 
 
+def get_graph_script() -> str:
+    script = server_document('http://localhost:5006/bkapp')
+    return script
+
+
 @bp_p_graph.route('/graph', methods=['GET'])
 def bkapp_page():
-    script = server_document('http://localhost:5006/bkapp')
-    return render_template("__base_graph.html", div=script, template="Flask")
+    script = get_graph_script()
+    return render_template("__base_graph.html", div=script)
 
 
 def bk_worker():
