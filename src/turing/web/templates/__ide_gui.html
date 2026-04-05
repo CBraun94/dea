@@ -1,7 +1,7 @@
 {% extends '__ide.html' %}
 
 {% block header_scripts %}
-  
+{% include '__t_ace_header.html' %}
 {% endblock header_scripts %}
 
 {% block header %}
@@ -38,5 +38,5 @@
 {% endblock tools %}
 
 {% block footer %}
-<iframe frameborder='0' src="{{ iframe_ide }}" class="iframe_ide"></iframe>
+{% include '__t_ace_body.html' %}
 {% endblock footer %}

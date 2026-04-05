@@ -16,8 +16,7 @@ def prepare_template_ide():
     script_graph = m.route_graph.get_graph_script()
     html = render_template(
         template_name_or_list=template_html,
-        script_graph=script_graph,
-        iframe_ide='/ide'
+        script_graph=script_graph
     )
 
     return html
