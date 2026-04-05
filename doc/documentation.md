@@ -12,5 +12,8 @@ https://bokeh.org/
 jinja
 https://jinja.palletsprojects.com/en/latest/templates/#template-inheritance
 
+networkx
+https://networkx.org/en/
+
 graphviz
 https://graphviz.org/
