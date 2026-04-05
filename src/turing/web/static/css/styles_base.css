@@ -18,3 +18,15 @@
   height: 100%;
   margin: 0;
 }
+
+#ttt {
+    height: 300px; /* Match height with editor */
+    width: 50%; /* Adjust width as needed */
+    background-color: black; /* Dark background color */
+    color: white; /* White text color for contrast */
+    overflow-y: auto; /* Enable scrolling if content exceeds height */
+    font-size: 18px;
+    font-family: monospace;
+    padding-left: 10px;
+    color: rgb(70, 242, 70);
+}
