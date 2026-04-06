@@ -48,7 +48,8 @@ def bkapp(doc: Document):
 
     doc.theme = _THEME
 
-    _graph = app.get_df_first().graphs['t']
+    _df = app.get_df_first()
+    _graph = _df.graphs[next(iter(_df.graphs))]
 
     G = r.graph.graph_to_nx(_graph)
     wb.get_netgraph(G=G, doc=doc)

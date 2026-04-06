@@ -4,10 +4,8 @@ from turing.app import app
 
 def init_df():
     from turing import reader as r
-    _df = app.get_df_first()
-    graph = r.mermaid.read_mermaid_flowchart(r.mermaid.mermaid.splitlines())
-    _df.graphs['t'] = graph
 
+    _df = app.get_df_first()
     _df.read_mermaid_from_dir(path='/home/chris/dev/dea/input/')
 
 

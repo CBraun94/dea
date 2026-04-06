@@ -40,4 +40,3 @@ class DataFrame(object):
             _g = mr.read(file)
             if _g is not None:
                 self.graphs[file] = _g
-                print(_g)
