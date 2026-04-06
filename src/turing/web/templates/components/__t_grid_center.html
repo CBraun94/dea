@@ -1,0 +1,18 @@
+<div class="center">
+<div class="tab">
+  <button id="defaultOpen" class="tablinks" onclick="openCity(event, 'Graph')">Graph</button>
+  <button class="tablinks" onclick="openCity(event, 'IDE')">IDE</button>
+  <button class="tablinks" onclick="openCity(event, 'Unused')">Unused</button>
+</div>
+<div id="Graph" class="tabcontent">
+{{ script_graph|indent(4)|safe }}
+</div>
+<div id="IDE" class="tabcontent">
+{% include 'components/__t_ace_body.html' %}
+</div>
+<div id="Unused" class="tabcontent">
+  <h3>Unused</h3>
+  <p>Unused</p>
+</div>
+<script type="text/javascript" src="static/js/tabs.js"></script>
+</div>

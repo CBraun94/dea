@@ -5,32 +5,7 @@
 {% endblock header_scripts %}
 
 {% block top %}
-<div class="navbar">
-  <a href="#file">File</a>
-  <a href="#edit">Edit</a>
-  <div class="dropdown">
-    <button class="dropbtn">Selection
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <button id="t" class="button_menubar">
-        <span id="buttonText">t</span>
-      </button>
-      <button id="t" class="button_menubar">
-        <span id="buttonText">t</span>
-      </button>
-      <button id="t" class="button_menubar">
-        <span id="buttonText">t</span>
-      </button>
-      <button id="t" class="button_menubar">
-        <span id="buttonText">t</span>
-      </button>
-      <button id="t" class="button_menubar">
-        <span id="buttonText">t</span>
-      </button>
-    </div>
-  </div>
-</div>
+{% include 'components/__t_menubar.html' %}
 {% endblock top %}
 
 {% block left %}
@@ -38,24 +13,7 @@
 {% endblock left %}
 
 {% block center %}
-<div class="center">
-<div class="tab">
-  <button id="defaultOpen" class="tablinks" onclick="openCity(event, 'Graph')">Graph</button>
-  <button class="tablinks" onclick="openCity(event, 'IDE')">IDE</button>
-  <button class="tablinks" onclick="openCity(event, 'Unused')">Unused</button>
-</div>
-<div id="Graph" class="tabcontent">
-{{ script_graph|indent(4)|safe }}
-</div>
-<div id="IDE" class="tabcontent">
-{% include 'components/__t_ace_body.html' %}
-</div>
-<div id="Unused" class="tabcontent">
-  <h3>Unused</h3>
-  <p>Unused</p>
-</div>
-<script type="text/javascript" src="static/js/tabs.js"></script>
-</div>
+{% include 'components/__t_grid_center.html' %}
 {% endblock center %}
 
 {% block right %}
