@@ -1,0 +1,7 @@
+:root{
+  --color: white;
+  --bg_color: black;
+  --border_bg_color: rgb(46, 46, 46);
+  --bg_color_item: #333;
+  --font-family: monospace;
+}

@@ -1,8 +1,4 @@
-:root{
-  --color: white;
-  --bg_color: black;
-  --border_bg_color: rgb(46, 46, 46);
-}
+@import "styles_const.css";
 
 .body {
   height: 100vh;

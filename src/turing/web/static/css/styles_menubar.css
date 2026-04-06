@@ -1,8 +1,9 @@
-/* Navbar container */
+@import "styles_const.css";
+
 .navbar {
   overflow: hidden;
-  background-color: #333;
-  font-family: monospace;
+  background-color: var(--bg_color_item);
+  font-family: var(--font-family);
   height: 50px;
 }
 
@@ -10,7 +11,7 @@
 .navbar a {
   float: left;
   font-size: 16px;
-  color: white;
+  color: var(--color);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -27,7 +28,7 @@
   font-size: 16px;
   border: none;
   outline: none;
-  color: white;
+  color: var(--color);
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit; /* Important for vertical align on mobile phones */
