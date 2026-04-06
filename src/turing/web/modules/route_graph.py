@@ -16,7 +16,13 @@ _VALUE = 'Value'
 
 _THEME = 'carbon'
 
-_BK_URL_ROOT = 'http://localhost:5006'
+_ORIGIN_APP_LH = "localhost:8000"
+_ORIGIN_APP_IP = "127.0.0.1:8000"
+_ORIGIN_BK = 'localhost:5006'
+
+_BK_URL_ROOT = 'http://'+_ORIGIN_BK
+
+_ORIGIN = [_ORIGIN_APP_LH, _ORIGIN_APP_IP, _ORIGIN_BK]
 
 
 def get_init_table_data_source() -> ColumnDataSource:
@@ -24,6 +30,9 @@ def get_init_table_data_source() -> ColumnDataSource:
     _source = ColumnDataSource(data)
 
     return _source
+
+
+_table_source = get_init_table_data_source()
 
 
 def bkapp(doc):
@@ -51,7 +60,7 @@ def bktable(doc):
 
     doc.theme = _THEME
 
-    _source = get_init_table_data_source()
+    _source = _table_source
 
     columns = [TableColumn(field=_PROPERTY, title=_PROPERTY), TableColumn(field=_VALUE, title=_VALUE)]
     data_table = DataTable(source=_source, columns=columns)
@@ -84,16 +93,23 @@ def bkapp_page():
 def run_code():
     from flask import request, jsonify
 
+    _p = []
+    _v = []
+
+    for key, value in request.args.items():
+        _p.append(key)
+        _v.append(value)
+
+    _table_source.update(data={_PROPERTY: _p, _VALUE: _v})
+
     return request.json
 
 
 def bk_worker():
-    # Can't pass num_procs > 1 in this configuration. If you need to run multiple
-    # processes, see e.g. flask_gunicorn_embed.py
     _apps = {}
     _apps['/bkapp'] = bkapp
     _apps['/bktable'] = bktable
-    server = Server(_apps, io_loop=IOLoop(), allow_websocket_origin=["localhost:8000", "127.0.0.1:8000", 'localhost:5006'])
+    server = Server(_apps, io_loop=IOLoop(), allow_websocket_origin=_ORIGIN)
     server.start()
     server.io_loop.start()
 

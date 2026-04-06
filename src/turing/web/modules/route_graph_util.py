@@ -70,7 +70,6 @@ def get_netgraph(G: nx.classes.Graph, doc=None, plot_title: str = None):
         aspect_ratio=None,
         css_classes=['center']
     )
-    p.title.text = plot_title
     p.toolbar.autohide = False
     p.toolbar.logo = None
 
