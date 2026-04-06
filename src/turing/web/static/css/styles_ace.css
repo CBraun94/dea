@@ -35,12 +35,16 @@
     display: flex;
 }
 #editor {
+    min-height: 30vh;
+    min-width: 30vw;
     height: 100%;
     width: 50%; /* Adjust width as needed */
     font-size: 18px;
     font-family: monospace;
 }
 #output {
+    min-height: 30vh;
+    min-width: 30vw;
     height: 100%; /* Match height with editor */
     width: 50%; /* Adjust width as needed */
     background-color: black; /* Dark background color */
