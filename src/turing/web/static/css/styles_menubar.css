@@ -3,6 +3,7 @@
   overflow: hidden;
   background-color: #333;
   font-family: monospace;
+  height: 50px;
 }
 
 /* Links inside the navbar */

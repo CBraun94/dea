@@ -30,6 +30,7 @@
   max-height: 80vh;
   max-width: 80vw;
   margin: 0;
+  overflow: hidden;
 }
 .container div.right {
   grid-area: right;
