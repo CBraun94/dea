@@ -2,6 +2,15 @@ from turing.web import app as web_app
 from turing.app import app
 
 
+def dir_walk(start_path='.') -> list[str]:
+    import os
+    _r = []
+    for root, dirs, files in os.walk(start_path):
+        for file in files:
+            _r.append(os.path.join(root, file))
+    return _r
+
+
 def init_df():
     from turing import reader as r
     _df = app.get_df_first()
@@ -19,6 +28,9 @@ def test():
 
 def main():
     import sys
+
+    _files = dir_walk()
+    print(_files)
 
     if len(sys.argv) == 1:
         init_df()
