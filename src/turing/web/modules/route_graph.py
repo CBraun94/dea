@@ -6,6 +6,7 @@ from flask import render_template
 from tornado.ioloop import IOLoop
 from bokeh.embed import server_document
 from bokeh.server.server import Server
+from bokeh.models import ColumnDataSource
 
 
 bp_p_graph = Blueprint('bp_p_graph', __name__)
@@ -16,6 +17,13 @@ _VALUE = 'Value'
 _THEME = 'carbon'
 
 _BK_URL_ROOT = 'http://localhost:5006'
+
+
+def get_init_table_data_source() -> ColumnDataSource:
+    data = {_PROPERTY: ['a', 'b'], _VALUE: ['a', 'b']}
+    _source = ColumnDataSource(data)
+
+    return _source
 
 
 def bkapp(doc):
@@ -39,12 +47,12 @@ def bkapp(doc):
 
 
 def bktable(doc):
-    from bokeh.models import ColumnDataSource, DataTable, TableColumn
+    from bokeh.models import DataTable, TableColumn
 
-    doc.theme = 'carbon'
+    doc.theme = _THEME
 
-    data = {_PROPERTY: ['a', 'b'], _VALUE: ['a', 'b']}
-    _source = ColumnDataSource(data)
+    _source = get_init_table_data_source()
+
     columns = [TableColumn(field=_PROPERTY, title=_PROPERTY), TableColumn(field=_VALUE, title=_VALUE)]
     data_table = DataTable(source=_source, columns=columns)
 
