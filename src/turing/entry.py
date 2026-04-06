@@ -22,7 +22,6 @@ def main():
 
     if len(sys.argv) == 1:
         init_df()
-        test()
         web_app.run()
 
 
