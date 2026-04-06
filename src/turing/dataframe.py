@@ -28,3 +28,9 @@ class DataFrame(object):
         _r: str = json.dumps(_d)
 
         return _r
+    
+    def read_mermaid_from_dir(path: str):
+        from turing import io
+
+        _files = io.dir_walk(path)
+        _files_mermaid = io.files_mermaid(_files)
