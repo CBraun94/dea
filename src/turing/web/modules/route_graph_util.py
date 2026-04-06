@@ -18,6 +18,8 @@ from bokeh.models import (
 )
 from bokeh.plotting import figure
 
+STATIC_JS_CB_TAPTOOL = '/home/chris/dev/dea/src/turing/web/static/js/cb_taptool.js'
+
 
 def prepare_labels(graph_renderer) -> LabelSet:
     x, y = zip(*graph_renderer.layout_provider.graph_layout.values())
@@ -50,7 +52,7 @@ def prepare_tools():
     from bokeh.models import CustomJS
 
     cb_js_code: str = None
-    with open(file='/home/chris/dev/dea/src/turing/web/static/js/cb_taptool.js', mode='r') as f:
+    with open(file=STATIC_JS_CB_TAPTOOL, mode='r') as f:
         cb_js_code = f.read()
 
     tooltips = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
@@ -84,9 +86,8 @@ def get_netgraph(G: nx.classes.Graph, doc=None, plot_title: str = None):
 
     p.tools = tools
 
-    if doc is not None:
-        doc.add_root(p)
-        doc.theme = 'carbon'
+    doc.add_root(p)
+    doc.theme = 'carbon'
 
     graph_renderer = None
     __layout: str = 'graphviz'
