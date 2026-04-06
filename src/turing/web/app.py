@@ -1,6 +1,6 @@
 import turing.web.modules as m
-from flask import Flask, render_template
 import turing.web._const as _c
+from flask import Flask, render_template
 
 
 template_html = _c.TEMPLATE_APP_ROUTE
