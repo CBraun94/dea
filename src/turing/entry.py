@@ -26,7 +26,7 @@ def test():
     df_edges.to_html('edges.html')
 
 
-def aaa(files: list[str]) -> list[str]:
+def files_mermaid(files: list[str]) -> list[str]:
     import pathlib
 
     _r = []
@@ -42,7 +42,7 @@ def main():
 
     _files = dir_walk()
     print(_files)
-    _f_mermaid = aaa(_files)
+    _f_mermaid = files_mermaid(_files)
     print(_f_mermaid)
 
     if len(sys.argv) == 1:
