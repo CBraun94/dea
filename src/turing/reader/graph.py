@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, List, Optional
 import networkx as nx
+import pandas as pd
 
 
 @dataclass
@@ -43,3 +44,18 @@ def graph_to_nx(graph: Graph) -> nx.Graph:
         G.add_edge(_e.source, _e.target, name=_e.name, docstring=_e.docstring, weight=1.0)
 
     return G
+
+
+def graph_to_df(graph: Graph) -> tuple[pd.DataFrame, pd.DataFrame]:
+    nodes: list[Node] = []
+    edges: list[Edge] = []
+
+    for key in graph.nodes:
+        nodes.append(graph.nodes[key])
+
+    edges = graph.edges.copy()
+
+    df_nodes = pd.DataFrame(nodes)
+    df_edges = pd.DataFrame(edges)
+
+    return df_nodes, df_edges

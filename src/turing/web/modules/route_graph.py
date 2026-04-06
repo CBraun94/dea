@@ -27,8 +27,15 @@ def bkapp(doc):
     from bokeh import events
     import web.modules.route_graph_util as wb
     doc.theme = 'carbon'
-    G = wb.get_net_data()
-    G = r.graph.graph_to_nx(r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines()))
+
+    _graph = r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines())
+
+    df_n, df_e = r.graph.graph_to_df(_graph)
+
+    print(df_n)
+    print(df_e)
+
+    G = r.graph.graph_to_nx(_graph)
     p = wb.get_netgraph(G=G, doc=doc, plot_title='state2 diagram')
 
 
