@@ -10,6 +10,13 @@ from bokeh.server.server import Server
 
 bp_p_graph = Blueprint('bp_p_graph', __name__)
 
+_PROPERTY = 'Property'
+_VALUE = 'Value'
+
+_THEME = 'carbon'
+
+_BK_URL_ROOT = 'http://localhost:5006'
+
 
 def bkapp(doc):
     SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
@@ -18,7 +25,7 @@ def bkapp(doc):
     from . import route_graph_util as wb
     import reader as r
 
-    doc.theme = 'carbon'
+    doc.theme = _THEME
 
     _graph = r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines())
 
@@ -36,9 +43,9 @@ def bktable(doc):
 
     doc.theme = 'carbon'
 
-    data = {'Property': ['a', 'b'], 'Value': ['a', 'b']}
+    data = {_PROPERTY: ['a', 'b'], _VALUE: ['a', 'b']}
     _source = ColumnDataSource(data)
-    columns = [TableColumn(field='Property', title='Property'), TableColumn(field='Value', title='Value')]
+    columns = [TableColumn(field=_PROPERTY, title=_PROPERTY), TableColumn(field=_VALUE, title=_VALUE)]
     data_table = DataTable(source=_source, columns=columns)
 
     data_table.autosize_mode = 'force_fit'
@@ -50,12 +57,12 @@ def bktable(doc):
 
 
 def get_graph_script() -> str:
-    script = server_document('http://localhost:5006/bkapp')
+    script = server_document(_BK_URL_ROOT+'/bkapp')
     return script
 
 
 def get_table_script() -> str:
-    script = server_document('http://localhost:5006/bktable')
+    script = server_document(_BK_URL_ROOT+'/bktable')
     return script
 
 
