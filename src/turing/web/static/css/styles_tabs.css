@@ -5,6 +5,7 @@
   color: var(--color);
   font-family: var(--font-family);
   background-color: var(--bg_color_item);
+  max-height: 50px;
 }
 
 /* Style the buttons inside the tab */
