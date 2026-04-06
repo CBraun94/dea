@@ -5,11 +5,14 @@ bp_p_ide_ace = Blueprint('bp_p_ide_ace', __name__)
 ROUTE_IDE_ACE_ROOT = '/ide'
 ROUTE_IDE_ACE_RUN = '/ide/run'
 
+TEMPLATE_IDE_ACE_ROUTE = 'ide_ace.html'
+
+
 @bp_p_ide_ace.route(ROUTE_IDE_ACE_ROOT)
 def index():
     from flask import render_template
 
-    return render_template('ide_ace.html')
+    return render_template(TEMPLATE_IDE_ACE_ROUTE)
 
 
 @bp_p_ide_ace.route(ROUTE_IDE_ACE_RUN, methods=['POST'])
