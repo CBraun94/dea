@@ -48,7 +48,7 @@ def prepare_tools():
     return tools
 
 
-def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None, plot_width: int = 400, plot_height: int = 400):
+def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None):
     import graph
     import math
     from bokeh.plotting import from_networkx, curdoc
@@ -58,20 +58,14 @@ def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None, plot_w
     alpha = 1.0
 
     p = figure(
-
         min_width=200,
         min_height=200,
-        max_width=1200,
-        max_height=800,
         toolbar_location='below',
         toolbar_sticky=False,
         align='center',
         resizable=False,
-        sizing_mode='scale_both',
-        aspect_ratio=None,
-        height_policy='max',
-        width_policy='max',
-        match_aspect=True
+        sizing_mode='stretch_both',
+        aspect_ratio=None
     )
     p.title.text = plot_title
     p.toolbar.autohide = False

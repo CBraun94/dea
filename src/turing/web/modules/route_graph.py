@@ -40,6 +40,11 @@ def bktable(doc):
     columns = [TableColumn(field='Property', title='Property'), TableColumn(field='Value', title='Value')]
     data_table = DataTable(source=_source, columns=columns)
 
+    data_table.autosize_mode = 'force_fit'
+    data_table.aspect_ratio = None
+    data_table.resizable = False
+    data_table.sizing_mode = 'scale_both'
+
     if doc is not None:
         doc.add_root(data_table)
         doc.theme = 'carbon'
