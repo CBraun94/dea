@@ -16,8 +16,21 @@ from bokeh.models import (
     Toolbar,
     ToolbarPanel,
 )
-
 from bokeh.plotting import figure
+
+def prepare_labels(graph_renderer) -> LabelSet:
+    x, y = zip(*graph_renderer.layout_provider.graph_layout.values())
+    graph_renderer.node_renderer.data_source.data['x'] = x
+    graph_renderer.node_renderer.data_source.data['y'] = y
+
+    labels = LabelSet(x='x',
+                      y='y',
+                      text='name',
+                      level='glyph',
+                      source=graph_renderer.node_renderer.data_source,
+                      text_color="#FFFFFF")
+
+    return labels
 
 
 def get_net_data():
@@ -49,7 +62,6 @@ def prepare_tools():
 
 
 def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None):
-    import graph
     import math
     from bokeh.plotting import from_networkx, curdoc
 
@@ -102,7 +114,7 @@ def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None):
     graph_renderer.node_renderer.data_source.on_change('selected', test)
     p.on_event(events.SelectionGeometry, aaa)
 
-    labels = graph.util.prepare_labels(graph_renderer=graph_renderer)
+    labels = prepare_labels(graph_renderer=graph_renderer)
 
     #graph_renderer.node_renderer.
 

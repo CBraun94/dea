@@ -35,6 +35,8 @@ def bkapp(doc):
 def bktable(doc):
     from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn
 
+    doc.theme = 'carbon'
+
     data = {'Property': ['a', 'b'], 'Value': ['a', 'b']}
     _source = ColumnDataSource(data)
     columns = [TableColumn(field='Property', title='Property'), TableColumn(field='Value', title='Value')]
