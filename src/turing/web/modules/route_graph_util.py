@@ -1,20 +1,13 @@
 import networkx as nx
-from networkx.drawing.nx_agraph import write_dot, graphviz_layout
-
+from networkx.drawing.nx_agraph import graphviz_layout
 from bokeh.models import (
-    BoxZoomTool,
     WheelZoomTool,
     PanTool,
     TapTool,
     Circle,
     HoverTool,
-    MultiLine,
-    Plot,
-    Range1d,
     ResetTool,
-    LabelSet,
-    Toolbar,
-    ToolbarPanel,
+    LabelSet
 )
 from bokeh.plotting import figure
 
@@ -64,7 +57,6 @@ def prepare_tools():
 
 
 def get_netgraph(G: nx.classes.Graph, doc=None, plot_title: str = None):
-    import math
     from bokeh.plotting import from_networkx
 
     p = figure(
@@ -96,6 +88,7 @@ def get_netgraph(G: nx.classes.Graph, doc=None, plot_title: str = None):
         graph_renderer = from_networkx(G, nx.spectral_layout, scale=1, center=(0, 0))
         graph_renderer.node_renderer.glyph = Circle(radius=0.03)
     elif __layout == 'spring':
+        import math
         graph_renderer = from_networkx(G, nx.spring_layout, scale=1, center=(0, 0), k=5/math.sqrt(G.order()), seed=0)
         graph_renderer.node_renderer.glyph = Circle(radius=0.03)
     elif __layout == 'graphviz':

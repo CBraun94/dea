@@ -15,8 +15,8 @@ bp_p_graph = Blueprint('bp_p_graph', __name__)
 
 
 def bkapp(doc):
-    import web.modules.route_graph_util as wb
-    import reader as r
+    import turing.web.modules.route_graph_util as wb
+    import turing.reader as r
 
     doc.theme = 'carbon'
 
