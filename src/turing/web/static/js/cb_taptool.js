@@ -15,6 +15,6 @@ $.ajax({
   contentType: 'application/json',
   data: JSON.stringify(dict),
   success: function (response) {
-    $(div_dst).text(response);
+    console.log(response)
   }
 });

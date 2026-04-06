@@ -36,15 +36,7 @@ def get_init_table_data_source() -> ColumnDataSource:
 
 
 table_source = get_init_table_data_source()
-new_table_data: dict = None
-
-
-def ttt():
-    return new_table_data
-
-
-def aaa():
-    return table_source
+new_table_data: list = []
 
 
 def bkapp(doc: Document):
@@ -87,9 +79,10 @@ def update_doc_table():
     global new_table_data
     global table_source
 
-    if new_table_data is not None:
-        table_source.data = new_table_data
-        new_table_data = None
+    if len(new_table_data) > 0:
+        table_source.data.clear()
+        table_source.data = new_table_data[-1]
+        new_table_data.clear()
 
 
 def get_graph_script() -> str:
@@ -122,16 +115,16 @@ def run_code():
         _p.append(key)
         _v.append(value)
 
-    new_table_data = {_PROPERTY: _p, _VALUE: _v}
+    new_table_data.append({_PROPERTY: _p, _VALUE: _v})
 
-    return request.json
+    return jsonify({})
 
 
 def bk_worker():
     _apps = {}
     _apps['/bkapp'] = bkapp
     _apps['/bktable'] = bktable
-    server = Server(_apps, io_loop=IOLoop(), allow_websocket_origin=_ORIGIN)
+    server = Server(_apps, allow_websocket_origin=_ORIGIN)
     server.start()
     server.io_loop.start()
 
