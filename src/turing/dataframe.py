@@ -2,6 +2,9 @@ import pandas as pd
 from uuid import UUID, uuid4
 import json
 
+KEY_UUID = 'uuid'
+KEY_DF = 'df'
+
 
 class DataFrame(object):
     def __init__(self):
@@ -10,11 +13,11 @@ class DataFrame(object):
 
     def to_dict(self) -> dict:
         _d = {}
-        _d['uuid'] = str(self.uuid)
-        _d['df'] = {}
+        _d[KEY_UUID] = str(self.uuid)
+        _d[KEY_DF] = {}
 
         for key in self.df:
-            _d['df'][key] = self.df[key].to_dict()
+            _d[KEY_DF][key] = self.df[key].to_dict()
 
         return _d
 
