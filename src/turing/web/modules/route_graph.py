@@ -16,8 +16,10 @@ _VALUE = 'Value'
 
 _THEME = 'carbon'
 
-_ORIGIN_APP_LH = "localhost:8000"
-_ORIGIN_APP_IP = "127.0.0.1:8000"
+_PORT_APP = '8000'
+
+_ORIGIN_APP_LH = "localhost:"+_PORT_APP
+_ORIGIN_APP_IP = "127.0.0.1:"+_PORT_APP
 _ORIGIN_BK = 'localhost:5006'
 
 _BK_URL_ROOT = 'http://'+_ORIGIN_BK
@@ -46,13 +48,8 @@ def bkapp(doc):
 
     _graph = r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines())
 
-    df_n, df_e = r.graph.graph_to_df(_graph)
-
-    print(df_n)
-    print(df_e)
-
     G = r.graph.graph_to_nx(_graph)
-    p = wb.get_netgraph(G=G, doc=doc, plot_title='state2 diagram')
+    wb.get_netgraph(G=G, doc=doc)
 
 
 def bktable(doc):
