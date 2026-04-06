@@ -42,13 +42,13 @@ new_table_data: list = []
 def bkapp(doc: Document):
     SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
     sys.path.append(SCRIPT_DIR)
-
+    from turing.app import app
     from . import route_graph_util as wb
     import reader as r
 
     doc.theme = _THEME
 
-    _graph = r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines())
+    _graph = app.get_df_first().graphs['t']
 
     G = r.graph.graph_to_nx(_graph)
     wb.get_netgraph(G=G, doc=doc)
