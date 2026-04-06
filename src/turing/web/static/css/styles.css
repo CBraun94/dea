@@ -3,6 +3,7 @@
 @import "styles_ace.css";
 @import "styles_menubar.css";
 @import "styles_sidebar.css";
+@import "styles_tabs.css";
 
 .container_iframe {
   width: 100%;
