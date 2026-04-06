@@ -8,6 +8,8 @@ def init_df():
     graph = r.mermaid.read_mermaid_flowchart(r.mermaid.mermaid.splitlines())
     _df.graphs['t'] = graph
 
+    _df.read_mermaid_from_dir(path='/home/chris/dev/dea/input/')
+
 
 def test():
     from turing.reader import graph

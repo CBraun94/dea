@@ -8,6 +8,7 @@ mermaid = """flowchart TD
         C -->|Two| E[iPhone]
         C -->|Three| F[Car]"""
 
+STATE = 'stateDiagram-v2'
 S = 'flowchart'
 T = '-->'
 N = '[*]'
@@ -29,16 +30,15 @@ RE_RECT = re.compile(re_string+re_bracket_rect)
 RE_DIA = re.compile(re_string+re_bracket_curly)
 
 
-def read(path: str = '') -> list[str]:
+def __read(path: str = '') -> str:
     _f: list[str] = None
     with open(path, mode='r') as f:
-        _f = f.readlines()
-        print(_f)
+        _f = f.read()
     return _f
 
 
 def mermaid_state_to_dict(lines: list[str]) -> dict:
-    _found = lines[0].find(S)
+    _found = lines[0].find(STATE)
 
     _r: dict = {}
 
@@ -166,6 +166,21 @@ def read_mermaid_flowchart(lines: list[str]) -> Graph:
 
     if read_head(head=head, fc=_r):
         read_body(body=body, fc=_r)
+
+    return _r
+
+
+def read(file_path: str):
+    file_str = __read(path=file_path)
+
+    lines = file_str.splitlines()
+
+    _r: Graph = None
+
+    if lines[0].strip().startswith(STATE):
+        _d = mermaid_state_to_dict(lines)
+    elif lines[0].strip().startswith(S):
+        _r = read_mermaid_flowchart(lines)
 
     return _r
 

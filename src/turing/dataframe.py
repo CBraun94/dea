@@ -28,9 +28,16 @@ class DataFrame(object):
         _r: str = json.dumps(_d)
 
         return _r
-    
-    def read_mermaid_from_dir(path: str):
+
+    def read_mermaid_from_dir(self, path: str):
         from turing import io
+        from turing.reader import mermaid as mr
 
         _files = io.dir_walk(path)
         _files_mermaid = io.files_mermaid(_files)
+
+        for file in _files_mermaid:
+            _g = mr.read(file)
+            if _g is not None:
+                self.graphs[file] = _g
+                print(_g)

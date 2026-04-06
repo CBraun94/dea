@@ -78,7 +78,7 @@ class DEA(BaseDEAObject):
 
     def read_mermaid_file(self, path: str = ''):
         from . import mermaid as mr
-        _lines = mr.read(path)
+        _lines = mr.__read(path)
         _dict = mr.mermaid_state_to_dict(_lines)
         self.fromDict(_dict)
 
