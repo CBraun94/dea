@@ -9,15 +9,12 @@ for (const property in cb_data.source.data) {
   dict[property] = cb_data.source.data[property][index]
 }
 
-$(div_dst).text(text);
-$(div_dst).text(JSON.stringify(dict));
-
 $.ajax({
   url: '/graph/select',
   method: 'POST',
   contentType: 'application/json',
   data: JSON.stringify(dict),
   success: function (response) {
-    $(div_dst).text(response.output);
+    $(div_dst).text(response);
   }
 });

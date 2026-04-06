@@ -115,6 +115,7 @@ def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None, plot_w
 
     p.renderers.append(labels)
 
+
     return p
 
 

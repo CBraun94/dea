@@ -24,6 +24,7 @@ bp_p_graph = Blueprint('bp_p_graph', __name__)
 
 
 def bkapp(doc):
+    from bokeh import events
     import web.modules.route_graph_util as wb
     doc.theme = 'carbon'
     G = wb.get_net_data()
@@ -31,8 +32,26 @@ def bkapp(doc):
     p = wb.get_netgraph(G=G, doc=doc, plot_title='state2 diagram')
 
 
+def bktable(doc):
+    from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn
+
+    data = {'Property': ['a', 'b'], 'Value': ['a', 'b']}
+    _source = ColumnDataSource(data)
+    columns = [TableColumn(field='Property', title='Property'), TableColumn(field='Value', title='Value')]
+    data_table = DataTable(source=_source, columns=columns)
+
+    if doc is not None:
+        doc.add_root(data_table)
+        doc.theme = 'carbon'
+
+
 def get_graph_script() -> str:
     script = server_document('http://localhost:5006/bkapp')
+    return script
+
+
+def get_table_script() -> str:
+    script = server_document('http://localhost:5006/bktable')
     return script
 
 
@@ -49,11 +68,13 @@ def run_code():
     return request.json
 
 
-
 def bk_worker():
     # Can't pass num_procs > 1 in this configuration. If you need to run multiple
     # processes, see e.g. flask_gunicorn_embed.py
-    server = Server({'/bkapp': bkapp}, io_loop=IOLoop(), allow_websocket_origin=["localhost:8000", "127.0.0.1:8000"])
+    _apps = {}
+    _apps['/bkapp'] = bkapp
+    _apps['/bktable'] = bktable
+    server = Server(_apps, io_loop=IOLoop(), allow_websocket_origin=["localhost:8000", "127.0.0.1:8000"])
     server.start()
     server.io_loop.start()
 
