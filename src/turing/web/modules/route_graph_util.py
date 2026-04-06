@@ -18,6 +18,7 @@ from bokeh.models import (
 )
 from bokeh.plotting import figure
 
+
 def prepare_labels(graph_renderer) -> LabelSet:
     x, y = zip(*graph_renderer.layout_provider.graph_layout.values())
     graph_renderer.node_renderer.data_source.data['x'] = x
@@ -46,7 +47,6 @@ def get_net_data():
 
 
 def prepare_tools():
-    from bokeh import events
     from bokeh.models import CustomJS
 
     cb_js_code: str = None
@@ -61,13 +61,9 @@ def prepare_tools():
     return tools
 
 
-def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None):
+def get_netgraph(G: nx.classes.Graph, doc=None, plot_title: str = None):
     import math
-    from bokeh.plotting import from_networkx, curdoc
-
-    from bokeh import themes
-
-    alpha = 1.0
+    from bokeh.plotting import from_networkx
 
     p = figure(
         min_width=200,
@@ -105,29 +101,10 @@ def get_netgraph(G: nx.classes.Graph, doc = None, plot_title: str = None):
         graph_renderer = from_networkx(graph=G, layout_function=graphviz_layout, prog='dot')
         graph_renderer.node_renderer.glyph = Circle(radius=3)
 
-    #graph_renderer.node_renderer.data_source.data['index'] = list(G.nodes())
-    #graph_renderer.apply_theme(themes._carbon.json)
-
-    from bokeh import events
-    from bokeh.models import CustomJS
-
-    graph_renderer.node_renderer.data_source.on_change('selected', test)
-    p.on_event(events.SelectionGeometry, aaa)
-
     labels = prepare_labels(graph_renderer=graph_renderer)
-
-    #graph_renderer.node_renderer.
 
     p.renderers.append(graph_renderer)
 
     p.renderers.append(labels)
 
-
     return p
-
-
-def test(attr, old, new):
-    print(test)
-
-def aaa(event):
-    print(event)

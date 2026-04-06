@@ -1,31 +1,23 @@
 from flask import Blueprint
-from bokeh.models import Plot
 import sys
 import os
-
 from threading import Thread
-
-from flask import Flask, render_template
+from flask import render_template
 from tornado.ioloop import IOLoop
-
 from bokeh.embed import server_document
-from bokeh.layouts import column
-from bokeh.models import ColumnDataSource, Slider
-from bokeh.plotting import figure
 from bokeh.server.server import Server
-from bokeh.themes import Theme
 
 SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 sys.path.append(SCRIPT_DIR)
 
-import reader as r
 
 bp_p_graph = Blueprint('bp_p_graph', __name__)
 
 
 def bkapp(doc):
-    from bokeh import events
     import web.modules.route_graph_util as wb
+    import reader as r
+
     doc.theme = 'carbon'
 
     _graph = r.mermaid_td.read_mermaid_flowchart(r.mermaid_td.mermaid.splitlines())
@@ -40,7 +32,7 @@ def bkapp(doc):
 
 
 def bktable(doc):
-    from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn
+    from bokeh.models import ColumnDataSource, DataTable, TableColumn
 
     doc.theme = 'carbon'
 
@@ -54,9 +46,7 @@ def bktable(doc):
     data_table.resizable = False
     data_table.sizing_mode = 'scale_both'
 
-    if doc is not None:
-        doc.add_root(data_table)
-        doc.theme = 'carbon'
+    doc.add_root(data_table)
 
 
 def get_graph_script() -> str:

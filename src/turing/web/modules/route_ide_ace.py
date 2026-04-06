@@ -2,15 +2,17 @@ from flask import Blueprint
 
 bp_p_ide_ace = Blueprint('bp_p_ide_ace', __name__)
 
+ROUTE_IDE_ACE_ROOT = '/ide'
+ROUTE_IDE_ACE_RUN = '/ide/run'
 
-@bp_p_ide_ace.route('/ide')
+@bp_p_ide_ace.route(ROUTE_IDE_ACE_ROOT)
 def index():
     from flask import render_template
 
     return render_template('ide_ace.html')
 
 
-@bp_p_ide_ace.route('/ide/run', methods=['POST'])
+@bp_p_ide_ace.route(ROUTE_IDE_ACE_RUN, methods=['POST'])
 def run_code():
     from flask import request, jsonify
     from io import StringIO
