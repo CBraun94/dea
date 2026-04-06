@@ -15,3 +15,11 @@ class DataFrame(object):
 
         for key in self.df:
             _d['df'][key] = self.df[key].to_dict()
+
+        return _d
+
+    def to_json(self) -> str:
+        _d = self.to_dict()
+        _r: str = json.dumps(_d)
+
+        return _r
