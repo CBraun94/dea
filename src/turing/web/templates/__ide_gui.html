@@ -1,6 +1,7 @@
 {% extends '__ide.html' %}
 
 {% block header_scripts %}
+
 {% include 'components/__t_ace_header.html' %}
 {% endblock header_scripts %}
 
@@ -38,27 +39,28 @@
 {% endblock left %}
 
 {% block center %}
+<div class="center">
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button id="defaultOpen" class="tablinks" onclick="openCity(event, 'Graph')">London</button>
+  <button class="tablinks" onclick="openCity(event, 'IDE')">Paris</button>
   <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
 </div>
 
-<div id="London" class="tabcontent center">
+<div id="Graph" class="tabcontent">
 {{ script_graph|indent(4)|safe }}
 </div>
 
-<div id="Paris" class="tabcontent center">
-  <h3>Paris</h3>
-  <p>Paris is the capital of France.</p> 
+<div id="IDE" class="tabcontent">
+{% include 'components/__t_ace_body.html' %}
 </div>
 
-<div id="Tokyo" class="tabcontent center">
+<div id="Tokyo" class="tabcontent">
   <h3>Tokyo</h3>
   <p>Tokyo is the capital of Japan.</p>
 </div>
-<script type="text/javascript" src="static/js/tabs.js"></script>
 
+
+</div>
 {% endblock center %}
 
 {% block right %}
@@ -67,5 +69,6 @@
 {% endblock right %}
 
 {% block bottom %}
-{% include 'components/__t_ace_body.html' %}
+<p>Bottom</p>
+<script type="text/javascript" src="static/js/tabs.js"></script>
 {% endblock bottom %}
