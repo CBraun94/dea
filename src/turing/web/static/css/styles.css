@@ -37,10 +37,11 @@
 }
 
 .graph {
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
+  min-width: 800px;
+  min-height: 800px;
   height: 100%;
+  width: 100%;
+  max-height: 80vh;
+  max-width: 80vw;
+  margin: 0;
 }

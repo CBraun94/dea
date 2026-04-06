@@ -67,7 +67,8 @@ def get_netgraph(G: nx.classes.Graph, doc=None):
         align='center',
         resizable=False,
         sizing_mode='stretch_both',
-        aspect_ratio=None
+        aspect_ratio=None,
+        css_classes=['graph']
     )
     p.toolbar.autohide = False
     p.toolbar.logo = None
