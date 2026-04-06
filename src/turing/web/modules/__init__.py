@@ -1,5 +1,5 @@
-from . import route_about
-from . import route_graph_util
-from . import route_graph
-from . import route_ide_ace
-from . import route_menubar
+import turing.web.modules.route_about
+import turing.web.modules.route_graph_util
+import turing.web.modules.route_graph
+import turing.web.modules.route_ide_ace
+import turing.web.modules.route_menubar

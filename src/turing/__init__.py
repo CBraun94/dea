@@ -1,6 +1,6 @@
-import turing.reader
-import turing.web
-from turing.entry import *
+from . import reader
+from . import web
+from .entry import *
 
 
 main()

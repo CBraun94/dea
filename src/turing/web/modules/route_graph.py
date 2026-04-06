@@ -7,16 +7,16 @@ from tornado.ioloop import IOLoop
 from bokeh.embed import server_document
 from bokeh.server.server import Server
 
-SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-sys.path.append(SCRIPT_DIR)
-
 
 bp_p_graph = Blueprint('bp_p_graph', __name__)
 
 
 def bkapp(doc):
-    import turing.web.modules.route_graph_util as wb
-    import turing.reader as r
+    SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+    sys.path.append(SCRIPT_DIR)
+
+    from . import route_graph_util as wb
+    import reader as r
 
     doc.theme = 'carbon'
 
@@ -78,7 +78,7 @@ def bk_worker():
     _apps = {}
     _apps['/bkapp'] = bkapp
     _apps['/bktable'] = bktable
-    server = Server(_apps, io_loop=IOLoop(), allow_websocket_origin=["localhost:8000", "127.0.0.1:8000"])
+    server = Server(_apps, io_loop=IOLoop(), allow_websocket_origin=["localhost:8000", "127.0.0.1:8000", 'localhost:5006'])
     server.start()
     server.io_loop.start()
 
