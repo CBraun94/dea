@@ -16,19 +16,20 @@
   grid-area: top;
   text-align: center;
   width: 100%;
-  height: 50px
+  min-height: 50px;
+  max-height: 55px;
 }
 .container div.left {
   grid-area: left;
 }
 .container div.center {
   grid-area: center;
-  min-width: 800px;
-  min-height: 800px;
+  min-width: 60vh;
+  min-height: 30vw;
   height: 100%;
   width: 100%;
-  max-height: 80vh;
-  max-width: 80vw;
+  max-height: 90vh;
+  max-width: 90vw;
   margin: 0;
   overflow: hidden;
 }
@@ -37,5 +38,7 @@
 }
 .container div.bottom {
   grid-area: bottom;
-  min-width: 800px;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
