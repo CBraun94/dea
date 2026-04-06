@@ -7,6 +7,7 @@ from tornado.ioloop import IOLoop
 from bokeh.embed import server_document
 from bokeh.server.server import Server
 from bokeh.models import ColumnDataSource
+from bokeh.document import Document
 
 
 bp_p_graph = Blueprint('bp_p_graph', __name__)
@@ -34,10 +35,19 @@ def get_init_table_data_source() -> ColumnDataSource:
     return _source
 
 
-_table_source = get_init_table_data_source()
+table_source = get_init_table_data_source()
+new_table_data: dict = None
 
 
-def bkapp(doc):
+def ttt():
+    return new_table_data
+
+
+def aaa():
+    return table_source
+
+
+def bkapp(doc: Document):
     SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
     sys.path.append(SCRIPT_DIR)
 
@@ -52,12 +62,13 @@ def bkapp(doc):
     wb.get_netgraph(G=G, doc=doc)
 
 
-def bktable(doc):
+def bktable(doc: Document):
     from bokeh.models import DataTable, TableColumn
+    global table_source
 
     doc.theme = _THEME
 
-    _source = _table_source
+    _source = table_source
 
     columns = [TableColumn(field=_PROPERTY, title=_PROPERTY), TableColumn(field=_VALUE, title=_VALUE)]
     data_table = DataTable(source=_source, columns=columns)
@@ -68,6 +79,17 @@ def bktable(doc):
     data_table.sizing_mode = 'scale_both'
 
     doc.add_root(data_table)
+
+    doc.add_periodic_callback(update_doc_table, 100)
+
+
+def update_doc_table():
+    global new_table_data
+    global table_source
+
+    if new_table_data is not None:
+        table_source.data = new_table_data
+        new_table_data = None
 
 
 def get_graph_script() -> str:
@@ -89,15 +111,18 @@ def bkapp_page():
 @bp_p_graph.route('/graph/select', methods=['POST'])
 def run_code():
     from flask import request, jsonify
+    global new_table_data
+
+    t = request.json
 
     _p = []
     _v = []
 
-    for key, value in request.args.items():
+    for key, value in t.items():
         _p.append(key)
         _v.append(value)
 
-    _table_source.update(data={_PROPERTY: _p, _VALUE: _v})
+    new_table_data = {_PROPERTY: _p, _VALUE: _v}
 
     return request.json
 
