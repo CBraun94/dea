@@ -1,6 +1,3 @@
-from . import mermaid_reader as mr
-
-
 NONE = '__none'
 N = '[*]'
 E = 'END_STATE'
@@ -80,6 +77,7 @@ class DEA(BaseDEAObject):
         self.states[_ss.name] = _ss
 
     def read_mermaid_file(self, path: str = ''):
+        from . import mermaid as mr
         _lines = mr.read(path)
         _dict = mr.mermaid_state_to_dict(_lines)
         self.fromDict(_dict)

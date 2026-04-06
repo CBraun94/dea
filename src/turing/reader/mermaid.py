@@ -37,6 +37,28 @@ def read(path: str = '') -> list[str]:
     return _f
 
 
+def mermaid_state_to_dict(lines: list[str]) -> dict:
+    _found = lines[0].find(S)
+
+    _r: dict = {}
+
+    if _found == -1:
+        print("Error: couldn't find: " + S)
+    else:
+        for i in range(1, len(lines)):
+            _s = lines[i].strip().split(' ')
+            if _s[1] == T:
+                if _s[0] in _r:
+                    _r[_s[0]].append(_s[2])
+                else:
+                    _r[_s[0]] = []
+                    _r[_s[0]].append(_s[2])
+            else:
+                print("Error: couldn't find: " + S)
+
+    return _r
+
+
 def read_head(head: str, fc: Graph) -> bool:
     _r: bool = False
     if head.startswith(S):
