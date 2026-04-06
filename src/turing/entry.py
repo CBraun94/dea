@@ -2,7 +2,7 @@ from turing.web import app as web_app
 from turing.app import app
 
 
-def dir_walk(start_path='.') -> list[str]:
+def dir_walk(start_path='/home/chris/dev/dea/input/') -> list[str]:
     import os
     _r = []
     for root, dirs, files in os.walk(start_path):
@@ -26,11 +26,24 @@ def test():
     df_edges.to_html('edges.html')
 
 
+def aaa(files: list[str]) -> list[str]:
+    import pathlib
+
+    _r = []
+    for file in files:
+        file_extension = pathlib.Path(file).suffix
+        if file_extension == '.mermaid':
+            _r.append(file)
+    return _r
+
+
 def main():
     import sys
 
     _files = dir_walk()
     print(_files)
+    _f_mermaid = aaa(_files)
+    print(_f_mermaid)
 
     if len(sys.argv) == 1:
         init_df()
