@@ -9,11 +9,20 @@ def init_df():
     _df.graphs['t'] = graph
 
 
+def test():
+    from turing.reader import graph
+    df_nodes, df_edges = graph.graph_to_df(app.get_df_first().graphs['t'])
+
+    df_nodes.to_html('nodes.html')
+    df_edges.to_html('edges.html')
+
+
 def main():
     import sys
 
     if len(sys.argv) == 1:
         init_df()
+        test()
         web_app.run()
 
 
