@@ -10,7 +10,10 @@
             "name": "Python Debugger: Module",
             "type": "debugpy",
             "request": "launch",
-            "module": "cb",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "module": "turing",
             "args": []
         },
     ]
