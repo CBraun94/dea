@@ -23,7 +23,9 @@ def tree_find(e, t):
 
 
 def template_treeview():
-    dict_ = {'A':['B', 'C'], 'B':['D','E'], 'C':['F', 'G', 'H'], 'E':['I', 'J']}
+    from turing.app import app as t_app
+
+    dict_ = {'files': t_app.data['files'].copy()}
     tree = {}
     for k,v in dict_.items():
         n = tree_find(k, tree)

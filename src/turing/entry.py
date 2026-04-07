@@ -3,10 +3,15 @@ from turing.app import app
 
 
 def init_df():
-    from turing import reader as r
-
     _df = app.get_df_first()
     _df.read_mermaid_from_dir(path='/home/chris/dev/dea/input/')
+
+
+def init_app():
+    from turing import io
+    _files = io.dir_walk()
+
+    app.data['files'] = _files.copy()
 
 
 def test():
@@ -21,6 +26,7 @@ def main():
     import sys
 
     if len(sys.argv) == 1:
+        init_app()
         init_df()
         web_app.run()
 
