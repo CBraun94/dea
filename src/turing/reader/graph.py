@@ -32,16 +32,17 @@ class Graph:
         self.edges = edges
 
 
-def graph_to_nx(graph: Graph) -> nx.Graph:
+def graph_to_nx(graphs: list[Graph]) -> nx.Graph:
     G = nx.DiGraph()
 
-    for _g in graph.nodes:
-        _n: Node = graph.nodes[_g]
-        G.add_node(_n.id, name=_n.name, shape=_n.shape, docstring=_n.docstring, radius=10, size=10)
+    for graph in graphs:
+        for _g in graph.nodes:
+            _n: Node = graph.nodes[_g]
+            G.add_node(_n.id, name=_n.name, shape=_n.shape, docstring=_n.docstring, radius=10, size=10)
 
-    for _edge in graph.edges:
-        _e: Edge = _edge
-        G.add_edge(_e.source, _e.target, name=_e.name, docstring=_e.docstring, weight=1.0)
+        for _edge in graph.edges:
+            _e: Edge = _edge
+            G.add_edge(_e.source, _e.target, name=_e.name, docstring=_e.docstring, weight=1.0)
 
     return G
 

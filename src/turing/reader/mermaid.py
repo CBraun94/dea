@@ -77,7 +77,7 @@ def mermaid_state_to_graph(lines: list[str]) -> Graph:
                     _src = 'START_STATE'
 
                 if _dst == N:
-                    _dst = 'END_STATE'
+                    _dst = 'ENDSTATE'
 
                 _r.edges.append(Edge(source=_src, target=_dst))
 
