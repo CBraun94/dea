@@ -1,3 +1,13 @@
+<div class="tab2">
+  <button id="defaultOpen2" class="tablinks2" onclick="openTab2(event, 'IDE2')">IDE</button>
+  <button class="tablinks2" onclick="openTab2(event, 'Output2')">Output</button>
+</div>
+<div id="IDE2" class="tabcontent2">
+{% include 'components/__t_ace_body.html' %}
+</div>
+<div id="Output2" class="tabcontent2">
 <div id="output_ide">
     {{ data }}
 </div>
+</div>
+<script type="text/javascript" src="static/js/tabs2.js"></script>
