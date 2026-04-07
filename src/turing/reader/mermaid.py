@@ -59,6 +59,40 @@ def mermaid_state_to_dict(lines: list[str]) -> dict:
     return _r
 
 
+def mermaid_state_to_graph(lines: list[str]) -> Graph:
+    _found = lines[0].find(STATE)
+
+    _r: Graph = Graph()
+
+    if _found == -1:
+        print("Error: couldn't find: " + S)
+    else:
+        for i in range(1, len(lines)):
+            _s = lines[i].strip().split(' ')
+            if _s[1] == T:
+                _src = _s[0]
+                _dst = _s[2]
+
+                if _src == N:
+                    _src = 'START_STATE'
+
+                if _dst == N:
+                    _dst = 'END_STATE'
+
+                _r.edges.append(Edge(source=_src, target=_dst))
+
+                if _src not in _r.nodes:
+                    _r.nodes[_src] = Node(id=_src, name=_src)
+                
+                if _dst not in _r.nodes:
+                    _r.nodes[_dst] = Node(id=_dst, name=_dst)
+
+            else:
+                print("Error: couldn't find: " + S)
+
+    return _r
+
+
 def read_head(head: str, fc: Graph) -> bool:
     _r: bool = False
     if head.startswith(S):
@@ -178,7 +212,7 @@ def read(file_path: str):
     _r: Graph = None
 
     if lines[0].strip().startswith(STATE):
-        _d = mermaid_state_to_dict(lines)
+        _r = mermaid_state_to_graph(lines)
     elif lines[0].strip().startswith(S):
         _r = read_mermaid_flowchart(lines)
 
