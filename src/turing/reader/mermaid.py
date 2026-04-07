@@ -74,7 +74,7 @@ def mermaid_state_to_graph(lines: list[str]) -> Graph:
                 _dst = _s[2]
 
                 if _src == N:
-                    _src = 'START_STATE'
+                    _src = 'STARTSTATE'
 
                 if _dst == N:
                     _dst = 'ENDSTATE'
