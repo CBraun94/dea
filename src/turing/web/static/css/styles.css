@@ -4,6 +4,7 @@
 @import "styles_menubar.css";
 @import "styles_sidebar.css";
 @import "styles_tabs.css";
+@import "styles_treeview.css";
 
 .graph {
   min-width: 30vw;
