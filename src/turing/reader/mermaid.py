@@ -83,7 +83,7 @@ def mermaid_state_to_graph(lines: list[str]) -> Graph:
 
                 if _src not in _r.nodes:
                     _r.nodes[_src] = Node(id=_src, name=_src)
-                
+
                 if _dst not in _r.nodes:
                     _r.nodes[_dst] = Node(id=_dst, name=_dst)
 
