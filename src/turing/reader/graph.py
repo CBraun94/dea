@@ -43,9 +43,6 @@ def graph_to_nx(graph: Graph) -> nx.Graph:
         _e: Edge = _edge
         G.add_edge(_e.source, _e.target, name=_e.name, docstring=_e.docstring, weight=1.0)
 
-    t = dict(nx.all_pairs_shortest_path(G))
-    print(t)
-
     return G
 
 

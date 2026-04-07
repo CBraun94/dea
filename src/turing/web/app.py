@@ -22,10 +22,7 @@ def tree_find(e, t):
     return None
 
 
-def template_treeview():
-    from turing.app import app as t_app
-
-    dict_ = {'files': t_app.data['files'].copy()}
+def template_treeview(dict_: dict):
     tree = {}
     for k,v in dict_.items():
         n = tree_find(k, tree)
@@ -35,15 +32,20 @@ def template_treeview():
 
 @app.route(_c.ROUTE_APP_ROOT)
 def prepare_template_ide():
-    data = r"{'A': {'A': ['A'], 'B': ['A', 'B'], 'C': ['A', 'B', 'C'], 'D': ['A', 'B', 'C', 'D'], 'E': ['A', 'B', 'C', 'E'], 'F': ['A', 'B', 'C', 'F']}, 'B': {'B': ['B'], 'C': ['B', 'C'], 'D': ['B', 'C', 'D'], 'E': ['B', 'C', 'E'], 'F': ['B', 'C', 'F']}, 'C': {'C': ['C'], 'D': ['C', 'D'], 'E': ['C', 'E'], 'F': ['C', 'F']}, 'D': {'D': ['D']}, 'E': {'E': ['E']}, 'F': {'F': ['F']}}"
+    from turing.app import app as t_app
+
+    dict_ = {'files': t_app.data['files'].copy()}
+
+    data = {'test':{'A': {'A': ['A'], 'B': ['A', 'B'], 'C': ['A', 'B', 'C'], 'D': ['A', 'B', 'C', 'D'], 'E': ['A', 'B', 'C', 'E'], 'F': ['A', 'B', 'C', 'F']}, 'B': {'B': ['B'], 'C': ['B', 'C'], 'D': ['B', 'C', 'D'], 'E': ['B', 'C', 'E'], 'F': ['B', 'C', 'F']}, 'C': {'C': ['C'], 'D': ['C', 'D'], 'E': ['C', 'E'], 'F': ['C', 'F']}, 'D': {'D': ['D']}, 'E': {'E': ['E']}, 'F': {'F': ['F']}}}
     script_graph = m.route_graph.get_graph_script()
     script_table = m.route_graph.get_table_script()
-    treeview = template_treeview()
+    treeview = template_treeview(dict_)
+    tv_data = template_treeview(data)
     html = render_template(
         template_name_or_list=template_html,
         script_graph=script_graph,
         script_table=script_table,
-        data=data,
+        data=tv_data,
         tree=treeview
     )
 
