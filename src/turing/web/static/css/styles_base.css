@@ -30,7 +30,7 @@
     font-size: 18px;
     font-family: monospace;
     padding-left: 10px;
-    color: rgb(70, 242, 70);
+    color: white;
 }
 
 .button_menubar{
@@ -44,4 +44,8 @@
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+}
+
+.bk-root .bk {
+    margin: 0 auto !important;
 }

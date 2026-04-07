@@ -33,7 +33,7 @@ class Graph:
 
 
 def graph_to_nx(graph: Graph) -> nx.Graph:
-    G = nx.MultiDiGraph()
+    G = nx.DiGraph()
 
     for _g in graph.nodes:
         _n: Node = graph.nodes[_g]
@@ -42,6 +42,9 @@ def graph_to_nx(graph: Graph) -> nx.Graph:
     for _edge in graph.edges:
         _e: Edge = _edge
         G.add_edge(_e.source, _e.target, name=_e.name, docstring=_e.docstring, weight=1.0)
+
+    t = dict(nx.all_pairs_shortest_path(G))
+    print(t)
 
     return G
 

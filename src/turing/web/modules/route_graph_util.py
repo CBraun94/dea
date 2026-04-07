@@ -60,15 +60,9 @@ def get_netgraph(G: nx.classes.Graph, doc=None):
     from bokeh.plotting import from_networkx
 
     p = figure(
-        min_width=200,
-        min_height=200,
         toolbar_location='below',
         toolbar_sticky=False,
-        align='center',
-        resizable=False,
-        sizing_mode='stretch_both',
-        aspect_ratio=None,
-        css_classes=['graph']
+        resizable=True
     )
     p.toolbar.autohide = False
     p.toolbar.logo = None
