@@ -27,9 +27,7 @@ def main():
     import sys
 
     import dotenv
-    import os
     dotenv.load_dotenv()
-    print(os.getenv('FLASK_PORT'))
 
     if len(sys.argv) == 1:
         init_app()
