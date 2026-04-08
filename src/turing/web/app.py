@@ -31,9 +31,9 @@ def tree_find(e, t):
 
 def template_treeview(dict_: dict):
     tree = {}
-    for k,v in dict_.items():
+    for k, v in dict_.items():
         n = tree_find(k, tree)
-        (tree if not n else n)[k] = {e:{} for e in v}
+        (tree if not n else n)[k] = {e: {} for e in v}
     return tree
 
 
@@ -48,13 +48,15 @@ def prepare_template_ide():
     script_table = m.route_graph.get_table_script()
     treeview = template_treeview(dict_)
     tv_data = template_treeview(data)
-    html = render_template(
-        template_name_or_list=template_html,
-        script_graph=script_graph,
-        script_table=script_table,
-        data=tv_data,
-        tree=treeview
-    )
+
+    context = {}
+    context['template_name_or_list'] = template_html
+    context['script_graph'] = script_graph
+    context['script_table'] = script_table
+    context['data'] = tv_data
+    context['tree'] = treeview
+
+    html = render_template(**context)
 
     return html
 
