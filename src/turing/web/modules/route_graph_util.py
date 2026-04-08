@@ -10,6 +10,10 @@ from bokeh.models import (
     LabelSet
 )
 from bokeh.plotting import figure
+from typing import List
+
+
+CSS_CLASSES: List[str] = []
 
 
 def prepare_labels(graph_renderer) -> LabelSet:
@@ -25,18 +29,6 @@ def prepare_labels(graph_renderer) -> LabelSet:
                       text_color="#FFFFFF")
 
     return labels
-
-
-def get_net_data():
-    G = nx.MultiDiGraph()
-    G.add_node('START_STATE')
-    G.add_node('Still')
-    G.add_edge('START_STATE', 'Still', weight=1.0, color='red')
-    G.add_edge('Still', 'END_STATE', weight=1.0, color='red')
-    G.add_edge('Still', 'Moving', weight=1.0, color='red')
-    G.add_edge('Moving', 'Crash', weight=1.0, color='red')
-    G.add_edge('Crash', 'END_STATE', weight=1.0, color='red')
-    return G
 
 
 def prepare_tools():
