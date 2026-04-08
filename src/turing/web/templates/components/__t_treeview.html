@@ -1,7 +1,7 @@
 {% macro render_tree(d) -%}
     <ul>
     {% for k,v in d.items(): -%}
-        <li><span onclick="buttonOnClick(this, 'IdSender', 'T_Event')">{{k}}</span>
+        <li><span onclick="buttonOnClick(this, id, 'T_Event')">{{k}}</span>
         {% if v -%}
         {{ render_tree(v) }}
         {% endif -%}
