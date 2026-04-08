@@ -6,6 +6,11 @@
 @import "styles_tabs.css";
 @import "styles_treeview.css";
 
+html *
+{
+   font-family: monospace !important;
+}
+
 .graph {
   min-width: 30vw;
   min-height: 30vh;
