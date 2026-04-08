@@ -3,8 +3,9 @@ from turing.app import app
 
 
 def init_df():
+    import os
     _df = app.get_df_first()
-    _df.read_mermaid_from_dir(path='/home/chris/dev/dea/input/')
+    _df.read_mermaid_from_dir(path=os.getenv('TURING_PATH_INPUT'))
 
 
 def init_app():
@@ -24,6 +25,11 @@ def test():
 
 def main():
     import sys
+
+    import dotenv
+    import os
+    dotenv.load_dotenv()
+    print(os.getenv('FLASK_PORT'))
 
     if len(sys.argv) == 1:
         init_app()

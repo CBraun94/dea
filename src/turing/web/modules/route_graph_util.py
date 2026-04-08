@@ -11,8 +11,6 @@ from bokeh.models import (
 )
 from bokeh.plotting import figure
 
-STATIC_JS_CB_TAPTOOL = '/home/chris/dev/dea/src/turing/web/static/js/cb_taptool.js'
-
 
 def prepare_labels(graph_renderer) -> LabelSet:
     x, y = zip(*graph_renderer.layout_provider.graph_layout.values())
@@ -43,9 +41,10 @@ def get_net_data():
 
 def prepare_tools():
     from bokeh.models import CustomJS
+    import os
 
     cb_js_code: str = None
-    with open(file=STATIC_JS_CB_TAPTOOL, mode='r') as f:
+    with open(file=os.getenv('TURING_PATH_JS_TAPTOOL'), mode='r') as f:
         cb_js_code = f.read()
 
     tooltips = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
