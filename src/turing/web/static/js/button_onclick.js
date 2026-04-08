@@ -3,6 +3,6 @@ function buttonOnClick(test, IdSender, T_Event) {
     console.log(T_Event);
     console.log(IdSender);
 
-    e = document.getElementById(this.id);
+    e = document.getElementById(IdSender);
     e.textContent = "click";
 }
