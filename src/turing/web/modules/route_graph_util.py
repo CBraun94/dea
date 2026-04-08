@@ -55,26 +55,11 @@ def prepare_tools():
     return tools
 
 
-def get_netgraph(G: nx.classes.Graph, doc=None):
+def prepare_graph_renderer(G: nx.classes.Graph):
     from bokeh.plotting import from_networkx
-
-    p = figure(
-        toolbar_location='below',
-        toolbar_sticky=False,
-        resizable=True
-    )
-    p.toolbar.autohide = False
-    p.toolbar.logo = None
-
-    tools = prepare_tools()
-
-    p.tools = tools
-
-    doc.add_root(p)
-    doc.theme = 'carbon'
+    __layout: str = 'graphviz'
 
     graph_renderer = None
-    __layout: str = 'graphviz'
 
     if __layout == 'spectral':
         graph_renderer = from_networkx(G, nx.spectral_layout, scale=1, center=(0, 0))
@@ -87,10 +72,36 @@ def get_netgraph(G: nx.classes.Graph, doc=None):
         graph_renderer = from_networkx(graph=G, layout_function=graphviz_layout, prog='dot')
         graph_renderer.node_renderer.glyph = Circle(radius=3)
 
+    return graph_renderer
+
+
+def prepare_graph_figure():
+    p = figure(
+        toolbar_location='below',
+        toolbar_sticky=False,
+        resizable=True
+    )
+    p.toolbar.autohide = False
+    p.toolbar.logo = None
+
+    tools = prepare_tools()
+
+    p.tools = tools
+
+    return p
+
+
+def get_netgraph(G: nx.classes.Graph, doc=None):
+    p = prepare_graph_figure()
+
+    doc.add_root(p)
+    doc.theme = 'carbon'
+
+    graph_renderer = prepare_graph_renderer(G)
+
     labels = prepare_labels(graph_renderer=graph_renderer)
 
     p.renderers.append(graph_renderer)
-
     p.renderers.append(labels)
 
     return p
