@@ -6,10 +6,17 @@ from flask import Flask, render_template
 template_html = _c.TEMPLATE_APP_ROUTE
 
 app = Flask(__name__)
-app.register_blueprint(m.route_about.bp_p_about)
-app.register_blueprint(m.route_ide_ace.bp_p_ide_ace)
-app.register_blueprint(m.route_graph.bp_p_graph)
-app.register_blueprint(m.route_menubar.bp_p_menubar)
+
+
+BLUEPRINTS = [m.route_about.bp_p_about,
+              m.route_ide_ace.bp_p_ide_ace,
+              m.route_graph.bp_p_graph,
+              m.route_menubar.bp_p_menubar]
+
+
+def register_blueprints():
+    for bp in BLUEPRINTS:
+        app.register_blueprint(bp)
 
 
 def tree_find(e, t):
