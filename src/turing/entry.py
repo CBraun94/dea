@@ -28,15 +28,9 @@ def test():
 
 def main():
     import sys
-
-    import dotenv
-    dotenv.load_dotenv()
-
     if len(sys.argv) == 1:
+        import dotenv
+        dotenv.load_dotenv()
         init_app()
         init_df()
         web_app.run()
-
-
-if __name__ == '__main__':
-    main()

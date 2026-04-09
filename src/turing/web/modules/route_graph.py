@@ -124,5 +124,6 @@ def bk_worker():
 
 
 def init() -> Thread:
-    t = Thread(target=bk_worker).start()
+    t = Thread(target=bk_worker)
+    t.daemon = True
     return t

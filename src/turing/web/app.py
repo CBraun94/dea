@@ -71,8 +71,5 @@ def doc_callback():
 def run():
     t = m.route_graph.init()
     register_blueprints()
+    t.start()
     app.run(port=_c.PORT_FLASK)
-
-
-if __name__ == '__main__':
-    run()
