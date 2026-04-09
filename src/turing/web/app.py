@@ -61,6 +61,13 @@ def prepare_template_ide():
     return html
 
 
+@app.route(_c.ROUTE_APP_ROOT+'callback')
+def doc_callback():
+    from flask import request, jsonify
+
+    return {}
+
+
 def run():
     t = m.route_graph.init()
     register_blueprints()
