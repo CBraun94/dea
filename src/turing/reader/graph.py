@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional
 import networkx as nx
 import pandas as pd
-
+from uuid import UUID, uuid4
 
 @dataclass
 class Node:
@@ -24,12 +24,14 @@ class Edge:
 class Graph:
     nodes: Dict[str, Node]
     edges: List[Edge]
+    uuid: Optional[UUID] = None
     direction: Optional[str] = None
     docstring: Optional[str] = None
 
-    def __init__(self, nodes={}, edges=[]):
+    def __init__(self, nodes={}, edges=[], uuid=uuid4()):
         self.nodes = nodes
         self.edges = edges
+        self.uuid = uuid
 
 
 def graph_to_nx(graphs: list[Graph]) -> nx.Graph:

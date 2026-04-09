@@ -18,6 +18,22 @@ CSS_CLASSES: List[str] = []
 TOOLTIPS_TABTOOL = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
 
 
+def get_graph_data():
+    import sys
+    import os
+    SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
+    sys.path.append(SCRIPT_DIR)
+    from turing.app import app
+
+    _df = app.get_df_first()
+    _g = []
+    for key in _df.graphs:
+        _g.append(_df.graphs[key])
+    # _graph = _df.graphs[next(iter(_df.graphs))]
+
+    return _g
+
+
 def prepare_labels(graph_renderer: GraphRenderer) -> LabelSet:
     x, y = zip(*graph_renderer.layout_provider.graph_layout.values())
     graph_renderer.node_renderer.data_source.data['x'] = x

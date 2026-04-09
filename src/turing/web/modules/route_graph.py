@@ -37,19 +37,12 @@ new_table_data: list = []
 
 
 def bkapp(doc: Document):
-    SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-    sys.path.append(SCRIPT_DIR)
-    from turing.app import app
     from . import t_bokeh as t_bk
-    import reader as r
+    import turing.reader as r
 
     doc.theme = os.getenv('T_BOKEH_THEME')
 
-    _df = app.get_df_first()
-    _g = []
-    for key in _df.graphs:
-        _g.append(_df.graphs[key])
-    # _graph = _df.graphs[next(iter(_df.graphs))]
+    _g = t_bk.graph.get_graph_data()
 
     G = r.graph.graph_to_nx(_g)
     t_bk.graph.get_netgraph(G=G, doc=doc)
