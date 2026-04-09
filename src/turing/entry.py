@@ -17,13 +17,14 @@ def init_app():
 
 def test():
     import os
+    import pandas as pd
     df = app.get_df_first()
 
-    for key in df.graphs:
-        _fn = os.path.basename(key)
+    e, c = df.graphs_to_list()
 
-    df_nodes.to_html('nodes.html')
-    df_edges.to_html('edges.html')
+    _df = pd.DataFrame(data=e, columns=c)
+
+    _df.to_html(os.getenv('TURING_PATH_OUTPUT')+'edges.html')
 
 
 def main():
@@ -33,4 +34,5 @@ def main():
         dotenv.load_dotenv()
         init_app()
         init_df()
+        test()
         web_app.run()

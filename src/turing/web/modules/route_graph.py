@@ -26,7 +26,7 @@ _ORIGIN = [_ORIGIN_APP_LH, _ORIGIN_APP_IP, _ORIGIN_BK]
 
 
 def get_init_table_data_source() -> ColumnDataSource:
-    data = {_PROPERTY: ['a', 'b'], _VALUE: ['a', 'b']}
+    data = {_PROPERTY: [None], _VALUE: [None]}
     _source = ColumnDataSource(data)
 
     return _source

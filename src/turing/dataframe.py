@@ -41,3 +41,13 @@ class DataFrame(object):
             _g = mr.read(file)
             if _g is not None:
                 self.graphs[file] = _g
+
+    def graphs_to_list(self):
+        _r_e = []
+        _r_columns = ['graph.uuid', 'name', 'source', 'target', 'docstring']
+        for key in self.graphs:
+            _g = self.graphs[key]
+            _e = _g.edges.copy()
+            for _edge in _e:
+                _r_e.append([_g.uuid, _edge.name, _edge.source, _edge.target, _edge.docstring])
+        return _r_e, _r_columns
