@@ -1,5 +1,5 @@
-import turing.web.modules.route_about
-import turing.web.modules.route_graph
-import turing.web.modules.route_ide_ace
-import turing.web.modules.route_menubar
+from . import route_about
+from . import route_graph
+from . import route_ide_ace
+from . import route_menubar
 from . import t_bokeh
