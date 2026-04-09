@@ -61,6 +61,7 @@ def bktable(doc: Document):
     global table_source
 
     doc.theme = os.getenv('T_BOKEH_THEME')
+    doc.add_periodic_callback(update_doc_table, 100)
 
     _source = table_source
 
@@ -73,8 +74,6 @@ def bktable(doc: Document):
     data_table.sizing_mode = 'scale_both'
 
     doc.add_root(data_table)
-
-    doc.add_periodic_callback(update_doc_table, 100)
 
 
 def update_doc_table():
@@ -103,7 +102,7 @@ def bkapp_page():
     return render_template("__base_graph.html", div=script)
 
 
-@bp_p_graph.route('/graph/select', methods=['POST'])
+@bp_p_graph.route('/graph/select', methods=['GET', 'POST'])
 def run_code():
     from flask import request, jsonify
     global new_table_data

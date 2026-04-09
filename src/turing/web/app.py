@@ -63,6 +63,7 @@ def prepare_template_ide():
 
 def run():
     t = m.route_graph.init()
+    register_blueprints()
     app.run(port=_c.PORT_FLASK)
 
 

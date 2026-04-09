@@ -15,7 +15,7 @@ from bokeh.models.renderers import GraphRenderer
 
 
 CSS_CLASSES: List[str] = []
-tooltips = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
+TOOLTIPS_TABTOOL = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
 
 
 def prepare_labels(graph_renderer: GraphRenderer) -> LabelSet:
@@ -41,7 +41,7 @@ def prepare_tools():
     with open(file=os.getenv('TURING_PATH_JS_TAPTOOL'), mode='r') as f:
         cb_js_code = f.read()
 
-    node_hover_tool = HoverTool(tooltips=tooltips)
+    node_hover_tool = HoverTool(tooltips=TOOLTIPS_TABTOOL)
     node_tap_tool = TapTool(behavior='select',  callback=CustomJS(code=cb_js_code))
     tools = [node_hover_tool, ResetTool(), WheelZoomTool(), PanTool(), node_tap_tool]
 
