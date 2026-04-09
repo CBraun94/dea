@@ -3,7 +3,6 @@ import sys
 import os
 from threading import Thread
 from flask import render_template
-from tornado.ioloop import IOLoop
 from bokeh.embed import server_document
 from bokeh.server.server import Server
 from bokeh.models import ColumnDataSource
@@ -14,8 +13,6 @@ bp_p_graph = Blueprint('bp_p_graph', __name__)
 
 _PROPERTY = 'Property'
 _VALUE = 'Value'
-
-_THEME = 'carbon'
 
 _PORT_APP = '8000'
 
@@ -43,10 +40,10 @@ def bkapp(doc: Document):
     SCRIPT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
     sys.path.append(SCRIPT_DIR)
     from turing.app import app
-    from . import route_graph_util as wb
+    from . import t_bokeh as t_bk
     import reader as r
 
-    doc.theme = _THEME
+    doc.theme = os.getenv('T_BOKEH_THEME')
 
     _df = app.get_df_first()
     _g = []
@@ -55,14 +52,15 @@ def bkapp(doc: Document):
     # _graph = _df.graphs[next(iter(_df.graphs))]
 
     G = r.graph.graph_to_nx(_g)
-    wb.get_netgraph(G=G, doc=doc)
+    t_bk.graph.get_netgraph(G=G, doc=doc)
 
 
 def bktable(doc: Document):
     from bokeh.models import DataTable, TableColumn
+    import os
     global table_source
 
-    doc.theme = _THEME
+    doc.theme = os.getenv('T_BOKEH_THEME')
 
     _source = table_source
 

@@ -11,12 +11,14 @@ from bokeh.models import (
 )
 from bokeh.plotting import figure
 from typing import List
+from bokeh.models.renderers import GraphRenderer
 
 
 CSS_CLASSES: List[str] = []
+tooltips = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
 
 
-def prepare_labels(graph_renderer) -> LabelSet:
+def prepare_labels(graph_renderer: GraphRenderer) -> LabelSet:
     x, y = zip(*graph_renderer.layout_provider.graph_layout.values())
     graph_renderer.node_renderer.data_source.data['x'] = x
     graph_renderer.node_renderer.data_source.data['y'] = y
@@ -39,7 +41,6 @@ def prepare_tools():
     with open(file=os.getenv('TURING_PATH_JS_TAPTOOL'), mode='r') as f:
         cb_js_code = f.read()
 
-    tooltips = [("index", "@index"), ("name", "@name"), ("shape", "@shape"), ("docstring", "@docstring")]
     node_hover_tool = HoverTool(tooltips=tooltips)
     node_tap_tool = TapTool(behavior='select',  callback=CustomJS(code=cb_js_code))
     tools = [node_hover_tool, ResetTool(), WheelZoomTool(), PanTool(), node_tap_tool]
@@ -51,7 +52,7 @@ def prepare_graph_renderer(G: nx.classes.Graph):
     from bokeh.plotting import from_networkx
     __layout: str = 'graphviz'
 
-    graph_renderer = None
+    graph_renderer: GraphRenderer = None
 
     if __layout == 'spectral':
         graph_renderer = from_networkx(G, nx.spectral_layout, scale=1, center=(0, 0))
@@ -84,10 +85,11 @@ def prepare_graph_figure():
 
 
 def get_netgraph(G: nx.classes.Graph, doc=None):
+    import os
     p = prepare_graph_figure()
 
     doc.add_root(p)
-    doc.theme = 'carbon'
+    doc.theme = os.getenv('T_BOKEH_THEME')
 
     graph_renderer = prepare_graph_renderer(G)
 
