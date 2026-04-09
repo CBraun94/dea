@@ -16,8 +16,11 @@ def init_app():
 
 
 def test():
-    from turing.reader import graph
-    df_nodes, df_edges = graph.graph_to_df(app.get_df_first().graphs['t'])
+    import os
+    df = app.get_df_first()
+
+    for key in df.graphs:
+        _fn = os.path.basename(key)
 
     df_nodes.to_html('nodes.html')
     df_edges.to_html('edges.html')

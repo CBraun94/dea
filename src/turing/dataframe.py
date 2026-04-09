@@ -2,6 +2,7 @@ import pandas as pd
 from uuid import UUID, uuid4
 import json
 from turing.reader.graph import Graph
+from typing import Dict
 
 KEY_UUID = 'uuid'
 KEY_DF = 'df'
@@ -10,10 +11,10 @@ KEY_DF = 'df'
 class DataFrame(object):
     def __init__(self):
         self.uuid: UUID = uuid4()
-        self.df: dict[str, pd.DataFrame] = {}
-        self.graphs: dict[str, Graph] = {}
+        self.df: Dict[str, pd.DataFrame] = {}
+        self.graphs: Dict[str, Graph] = {}
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict:
         _d = {}
         _d[KEY_UUID] = str(self.uuid)
         _d[KEY_DF] = {}

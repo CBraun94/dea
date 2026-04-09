@@ -82,10 +82,10 @@ def mermaid_state_to_graph(lines: list[str]) -> Graph:
                 _r.edges.append(Edge(source=_src, target=_dst))
 
                 if _src not in _r.nodes:
-                    _r.nodes[_src] = Node(id=_src, name=_src)
+                    _r.nodes[_src] = Node(id=_src, name=_src, shape='circle')
 
                 if _dst not in _r.nodes:
-                    _r.nodes[_dst] = Node(id=_dst, name=_dst)
+                    _r.nodes[_dst] = Node(id=_dst, name=_dst, shape='circle')
 
             else:
                 print("Error: couldn't find: " + S)
