@@ -37,7 +37,7 @@ def template_treeview(dict_: dict):
     return tree
 
 
-def test():
+def all_edges_to_table():
     import os
     fn = os.getenv('TURING_PATH_OUTPUT')+'edges.html'
     r: str = ''
@@ -54,7 +54,7 @@ def prepare_template_ide():
 
     dict_ = {'files': t_app.data['files'].copy()}
 
-    data = test()
+    data = all_edges_to_table()
     script_graph = m.route_graph.get_graph_script()
     script_table = m.route_graph.get_table_script()
     treeview = template_treeview(dict_)
