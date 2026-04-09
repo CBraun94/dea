@@ -72,7 +72,8 @@ def prepare_graph_figure():
     p = figure(
         toolbar_location='below',
         toolbar_sticky=False,
-        resizable=True
+        resizable=True,
+        sizing_mode='stretch_both'
     )
     p.toolbar.autohide = False
     p.toolbar.logo = None

@@ -102,8 +102,8 @@ def bkapp_page():
     return render_template("__base_graph.html", div=script)
 
 
-@bp_p_graph.route('/graph/select', methods=['GET', 'POST'])
-def run_code():
+@bp_p_graph.route('/graph/select', methods=['POST'])
+def route_graph_select():
     from flask import request, jsonify
     global new_table_data
 
